@@ -1,0 +1,42 @@
+<div class="layout-content">
+ <p-toolbar>
+  <div class="p-toolbar-group-end">
+    <p-button label="Excel" icon="pi pi-file-excel"(click)="exportToExcel()"
+      [style]="{ 'background-color': '#28a745', 'border-color': '#28a745' }"/>
+  </div>
+</p-toolbar>
+     <p-panel header="User List">
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table  [value]="Userlist"  [scrollable]="true" [rows]="100" [paginator]="true" scrollHeight="400px"
+                columnResizeMode="expand">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:4rem">Staff_Code</th>
+                        <th style="width:8rem">Name</th>
+                        <!-- <th style="width:4rem">Group</th>
+                        <th style="width:4rem">Visa</th> -->
+                        <th style="width:4rem">Company</th>
+                        <th style="width:6rem">Username</th>
+                        <th style="width:4rem">Password</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td>{{data.staffCode}}</td>
+                        <td>{{data.staffName}}</td>
+                        <!-- <td>{{'group'}}</td>
+                        <td>{{'visa'}}</td> -->
+                        <td>{{getCompanyNameById(data.companyId)}}</td>
+                         <td>{{data.userName}}</td>
+                        <td>{{data.passwd}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    </p-panel>
+</div>
+
+<p-toast></p-toast>

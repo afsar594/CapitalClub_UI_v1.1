@@ -1,0 +1,41 @@
+/*-------------------------------------------------------------------*/
+@import '~handsontable/dist/handsontable.full.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/solid.min.css';
+
+.p-panel .p-panel-header {
+    border: .5px solid #e5e7eb;
+    padding: .5rem;
+    background: #0d526b !important;
+    color: #ffffff !important;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.p-panel .p-panel-header .p-panel-title {
+    font-weight: 500;
+    color: #ffffff !important;
+
+
+
+}
+
+.p-datatable .p-datatable-thead>tr>th {
+    text-align: left;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-width: 0 0 1px 0;
+    font-weight: 700;
+    font-size: 14px !important;
+    color: #374151;
+    background: #f9fafb;
+    transition: box-shadow .2s;
+}
+
+.p-datatable .p-datatable-tbody>tr>td {
+    font-size: small !important;
+    text-align: left;
+    border: 1px solid #e5e7eb;
+    border-width: 0 0 1px 0;
+    padding: 1rem;
+}

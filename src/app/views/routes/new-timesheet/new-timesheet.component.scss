@@ -1,0 +1,28 @@
+.parent-container {       
+    overflow: scroll;
+    max-height: 450px;
+    position: relative;
+    height: 100%;
+    z-index: 1;
+    min-height: 450px;
+}
+    .container {
+       
+       
+    }
+
+    .w-100 {
+        width:100%;
+    }
+
+
+
+.card {
+    height: 100%;
+}
+body .ui-dropdown .ui-calendar .ui-datepicker, body .ui-dropdown {
+    min-width: 100% !important;
+}
+
+
+

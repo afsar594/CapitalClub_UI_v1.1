@@ -1,0 +1,148 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="layout-content">
+    <p-dialog header="New Leave Request" [(visible)]="display" 
+    [breakpoints]="{ '1199px': '75vw', '575px': '95vw' }"
+    [style]="{ width: '50vw' }"
+    [draggable]="false"
+    [resizable]="false"
+    [baseZIndex]="1000">
+        <app-leaverequest (valueChange)='ReloadData()'></app-leaverequest>
+    </p-dialog>
+    <!-- <div class="col-12 md:col-12 lg:col-12 task-list" > -->
+    <p-panel header="Leave Details  [ {{title}} ]" [style]="{minHeight: '360px'}">
+
+        <div class="grid p-fluid">
+            <div class="field col-12 md:col-2">
+                <label for="stacked">Select Date From</label>
+                <p-calendar [showIcon]="true" [(ngModel)]='fromdate' dateFormat="dd-M-yy" readonly required />
+            </div>
+            <div class="field col-12 md:col-2">
+                <label for="stacked">End Date</label>
+                <p-calendar [showIcon]="true" [(ngModel)]='enddate' dateFormat="dd-M-yy" readonly required />
+            </div>
+            <div class="field col-12 md:col-2">
+                <label for="stacked"> </label>
+                <div class="flex align-items-end flex-wrap">
+                    <div class="flex align-items-center justify-content-center m-2">
+                        <p-button type="submit" style="width: 148px;" styleClass="p-button-success" (click)="filterData()"
+                            label="Filter"></p-button>
+                    </div>
+                </div>
+            </div>
+            <div class="field col-12 md:col-2">
+                <label for="stacked"></label>
+                <div class="flex align-items-end flex-wrap">
+                    <div class="flex align-items-center justify-content-center m-2">
+                        <p-splitButton label="Refresh" styleClass="p-button-secondary" icon="pi pi-plus"
+                            (onClick)="ReloadData()" [model]="items"></p-splitButton>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+                 <div class="field col-12 md:col-2">
+                <label for="stacked"> </label>
+                <div class="flex align-items-end flex-wrap">
+                    <div class="flex align-items-center justify-content-center m-2">
+                                <p-button 
+                    (click)="toggleSort()" 
+                    class="toggle" 
+                    label="{{ sortOrder === 'asc' ? 'Sort ↓ Descending' : 'Sort ↑ Ascending' }}">
+                    </p-button>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="field col-12 md:col-2">
+                <label for="stacked"> </label>
+                <div class="flex align-items-end flex-wrap">
+                    <div class="flex align-items-center justify-content-center m-2">
+                        <p-button styleClass="p-button-danger" (click)="showDialog()"
+                            label="New Leave Request"></p-button>
+                    </div>
+                </div>
+            </div>
+              </div>
+                      <!-- <div class="field col-12 md:col-2">
+              <p-button  (click)="toggleSort()" class="toggle">
+                {{ sortOrder === 'asc' ? 'Sort ↓ Descending' : 'Sort ↑ Ascending' }}
+              </p-button>
+
+
+            </div> -->
+        <div class="grid">
+            <div class="col-12">
+                <p-panel header="Details" [style]="{minHeight: '360px'}">
+                    <p-table [value]="sortedData" [scrollable]="true" [rows]="100" scrollHeight="250px"
+                        columnResizeMode="expand">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width:4rem">Code</th>
+                                <th style="width:8rem">Leave Type</th>
+                                <th style="width:8rem">Company Name</th>
+                                <th style="width:8rem">fromdate</th>
+                                <th style="width:8rem">End Date</th>
+                                <th style="width:6rem">Total Days</th>
+                                <th style="width:8rem">Reason</th>
+                                <th style="width:8rem">Request Date</th>
+                                <th style="width:8rem">Status</th>
+                                <th style="width:8rem">Action</th>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-leavedata>
+                            <tr>
+                                <td style="width:4rem">{{leavedata.leavDataId}}</td>
+                                <td style="width:8rem">{{leavedata.leaveDataTypeNavigation.leaveType}}</td>
+                                <td style="width:8rem">{{leavedata.companyName}}</td>
+                                <td style="width:8rem">{{leavedata.leaveDataFrom}}</td>
+                                <td style="width:8rem">{{leavedata.leaveDataTo}}</td>
+                                <td style="width:6rem">{{leavedata.leaveDays}}</td>
+                                <td style="width:8rem">{{leavedata.leaveDataReason}}</td>
+                                <td style="width:8rem">{{leavedata.reqDate | date:"dd/MMM/yyyy"}}</td>
+                                <td style="width:8rem">
+                                    <ng-container *ngIf="leavedata.status === 0">
+                                        Pending
+                                    </ng-container>
+                                    <ng-container *ngIf="leavedata.status === 1">
+                                        Processed
+                                    </ng-container>
+                                    <ng-container *ngIf="leavedata.status === 2">
+                                        Approved
+                                    </ng-container>
+                                    <ng-container *ngIf="leavedata.status === 3">
+                                        Rejected
+                                    </ng-container>
+
+                                </td>
+
+                                <td style="width:8rem">
+                                    <ng-container *ngIf="leavedata.status === 0">
+                                        <p-button label="Delete" (click)='deleteleave(leavedata.leavDataId)'
+                                            styleClass="ui-button-danger"></p-button>
+                                    </ng-container>
+                                    <ng-container *ngIf="leavedata.status === 1">
+                                        <p-button label="Delete" (click)='deleteleave(leavedata.leavDataId)'
+                                            styleClass="ui-button-danger"></p-button>
+                                    </ng-container>
+
+
+                                    <!-- <button pButton type="button" label="Delete" class="p-button-rounded p-button-danger" (click)='deleteleave(leavedata.leavDataId)'></button> -->
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-panel>
+            </div>
+        </div>
+
+    </p-panel>
+
+
+
+    <!-- </div> -->
+</div>

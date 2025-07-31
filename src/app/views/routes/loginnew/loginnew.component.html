@@ -1,0 +1,56 @@
+<body class="m-0 p-0 overflow-hidden h-screen w-screen">
+    <div class="grid h-screen w-screen m-0 p-0 overflow-hidden">
+ <div class="col-12 md:col-5 h-screen flex items-center justify-center bg-white">
+  <img
+    src="assets/Images/new1.jpg"
+    alt="SUNNY Management Group"
+    class="h-full w-auto object-contain"
+  />
+</div>
+
+        <div class="col-12 md:col-7 flex align-items-center justify-content-center h-full p-4 mt-2">
+            <div class="surface-card p-4 shadow-2 border-round w-full max-w-30rem">
+                <div class="flex justify-content-center mb-3 gap-2 flex-wrap">
+                    <img src="assets/Images/DSH1.png" alt="Dr Sunny Home Health" class="h-3rem" />
+                    <img src="assets/Images/dsmc.png" alt="Dr Sunny Medical" class="h-3rem" />
+                </div>
+
+                <div class="text-center mb-4">
+                    <h3 class="text-2xl font-semibold mb-1">Sign In</h3>
+                    <p class="text-sm text-gray-600">Please enter your details to sign in</p>
+                </div>
+
+                <div class="field mb-3">
+                    <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
+                    <span class="p-input-icon-right w-full">
+                        <i class="pi pi-envelope"></i>
+                        <input id="email" type="email" pInputText class="w-full" />
+                    </span>
+                </div>
+
+                <div class="field mb-2">
+                    <label for="password" class="block text-sm font-medium mb-1">Password</label>
+                    <span class="p-input-icon-right w-full">
+                        <i class="pi pi-eye-slash"></i>
+                        <input id="password" type="password" pInputText class="w-full" />
+                    </span>
+                </div>
+
+                <div class="flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                    <div class="flex align-items-center">
+                        <p-checkbox inputId="remember" binary="true"></p-checkbox>
+                        <label for="remember" class="ml-2 text-sm">Remember Me</label>
+                    </div>
+                    <a href="#" class="text-sm text-red-500 font-medium">Forgot Password?</a>
+                </div>
+
+                <button pButton label="Sign In"
+                    class="w-full p-button-sm p-button-rounded p-button-warning mb-3"></button>
+
+                <p class="text-sm text-center">Don’t have an account?
+                    <a href="#" class="text-orange-500 font-semibold">Create Account</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,149 @@
+<div class="layout-content">
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <p-button [label]="btnFlag.save == true ? 'Approve': 'Approve'" (click)="approveServices()"
+                icon="fa fa-floppy-o" class="mr-2" styleClass="ui-button-success"></p-button>
+            <p-button label="Reject" class="mr-2" (click)="RejectService()" icon="pi pi-external-link"
+                styleClass="ui-button-danger">
+            </p-button>
+            <p-button label="Exit" (click)="ExitNew()" icon="fa fa-sign-out" styleClass="ui-button-inspire"></p-button>
+        </div>
+    </p-toolbar>
+    
+    <p-card [formGroup]='serviceform'>
+
+        <p-panel header="Leave Request">
+            <div style="width: 100vw;">
+                <div class="grid  mt-4">
+                    <div class="p-col-8">
+                        <div class="grid">
+                            <div class="lg:col-6 sm:col-12 md:col-6">
+                                <div class="flex flex-column gap-2">
+                                    <label>Service Type</label>
+                                    <p-dropdown placeholder="-----Select Type-----" [options]="serviceTypes"
+                                    formControlName="servicetype" optionLabel="serviceReqTypeName"
+                                     optionValue='serviceReqTypeId' [style]="{'width':'100%'} "
+                                    [showClear]="true" [disabled]= 'false'></p-dropdown>
+                            
+                                    <p-message severity="error" text="Required"
+                                        *ngIf="!serviceform.controls['servicetype'].valid&&serviceform.controls['servicetype'].dirty"></p-message>
+                                </div>
+                            </div>
+                            <div class="lg:col-6 sm:col-12 md:col-6">
+                                <div class="flex flex-column gap-2">
+                                    <label for="username"> Request Date</label>
+    
+                                    <p-calendar class="w-100" [style]="{'width':'100%'} " [inputStyle]="{'width':'100%'}" useUtc formControlName="requestdate"
+                                    dateFormat="dd/M/yy" readonly [disabled]= 'true'>
+                                 </p-calendar>
+                                </div>
+                            </div>
+    
+                        </div>
+                        <div class="grid">
+                            <div class="lg:col-6 sm:col-12 md:col-6">
+                                <div class="flex flex-column gap-2">
+                                    <label for="lastname3" class="p-col-fixed" style="width:200px">Request Reason<span
+                                        class="mand_star"></span></label>
+
+                                <textarea rows="3" cols="50" formControlName="reason" pInputTextarea
+                                    autoResize="autoResize"></textarea>
+                                </div>
+                            </div>
+                            <div class="lg:col-6 sm:col-12 md:col-6">
+                                <div class="flex flex-column gap-2">
+                                    <label for="lastname3" class="p-col-fixed" style="width:110px">Remarks<span
+                                        class="mand_star"></span></label>
+
+                                <textarea rows="3" cols="50" formControlName="remarks" pInputTextarea
+                                    autoResize="autoResize"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="p-col-4">
+                        <div class="p-grid">
+                            <!-- <p-image [src]="serviceform.controls.imageFile.value"
+                                [previewImageSrc]="serviceform.controls.imageFile.value" alt="Image" width="250"
+                                [preview]="true" />
+     -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </p-panel>
+    </p-card>
+    <!-- <div class="toolbar">
+        <div class="ui-toolbar-group-left">
+            <p-button [label]="btnFlag.save == true ? 'Approve': 'Approve'" (click)="approveServices()"
+                icon="fa fa-floppy-o" styleClass="ui-button-success"></p-button>
+            <p-button label="Reject" (click)="RejectService()" icon="pi pi-external-link" styleClass="ui-button-danger">
+            </p-button>
+            <p-button label="Exit" (click)="ExitNew()" icon="fa fa-sign-out" styleClass="ui-button-inspire"></p-button>
+
+        </div>
+    </div> -->
+
+    <!-- <div class="card card-w-title" [formGroup]='serviceform'>
+        <div class="p-grid p-sm-12 p-md-12 p-lg-12">
+            <div class="p-sm-12 p-md-12 p-lg-12">
+                <p-panel header="Service Request">
+                    <div class="p-grid">
+                        <div class="p-col-6">
+                            <div class="p-grid">
+                                <div class="p-col">
+                                    <label for="leavetype">Service Type<span class="mand_star"></span></label>
+                                    <p-dropdown placeholder="-----Select Type-----" [options]="serviceTypes"
+                                        formControlName="servicetype" optionLabel="serviceReqTypeName" optionValue='serviceReqTypeID'
+                                        [showClear]="true" [disabled]= 'false'></p-dropdown>
+                                </div>
+
+
+                                <div class="p-col">
+                                    <label for="lastname3" class="p-col-fixed">Request Date<span
+                                        class="mand_star"></span></label>
+                                    <p-calendar class="w-100" [style]="{'width':'100%'} " [inputStyle]="{'width':'100%'}" useUtc formControlName="requestdate"
+                                       dateFormat="dd/M/yy" readonly [disabled]= 'true'>
+                                    </p-calendar>
+                                </div>
+                            </div>
+
+                            <div class="p-grid">
+                                <div class="p-field p-col">
+                                    <label for="lastname3" class="p-col-fixed" style="width:200px">Request Reason<span
+                                            class="mand_star"></span></label>
+
+                                    <textarea rows="3" cols="50" formControlName="reason" pInputTextarea
+                                        autoResize="autoResize"></textarea>
+
+                                    </div>
+                            </div>
+
+                            <div class="p-grid">
+                                <div class="p-field p-col">
+                                    <label for="lastname3" class="p-col-fixed" style="width:110px">Remarks<span
+                                            class="mand_star"></span></label>
+
+                                    <textarea rows="3" cols="50" formControlName="remarks" pInputTextarea
+                                        autoResize="autoResize"></textarea>
+
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="p-col">
+                            <div class="p-grid">
+                                <div class="p-col-12">
+                                    
+                                </div>
+                                <div class="p-col-12"></div>
+                            </div>
+                        </div>
+                    </div>
+                </p-panel>
+            </div>
+        </div>
+    </div> -->
+</div>

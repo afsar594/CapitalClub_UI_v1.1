@@ -1,0 +1,148 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<div class="layout-content">
+
+    <p-dialog header="New Service Request" [(visible)]="display" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+        [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false" [baseZIndex]="10000">
+        <app-new-service (valueChange)='ReloadData()'></app-new-service>
+        <p-footer>
+            <!-- <button type="button" pButton icon="pi pi-times" (click)="display=false" label="Cancel" class="ui-button-secondary"></button> -->
+        </p-footer>
+    </p-dialog>
+    <div class="col-12 md:col-12 task-list">
+        <p-panel header="Service Request Details" [style]="{minHeight: '360px'}">
+            <!-- <div style="position: relative;top: -43px;right: -12px;">
+                <p-button label="+Service Request" (click)="showDialog()" style="float: right;" icon="pi pi-external-link"
+                styleClass="ui-button-danger"></p-button>
+            </div> -->
+            <!-- <hot-table [afterChange]="detectChanges" [settings]="tableSettings" [data]="ServiceDatas">
+                    </hot-table> -->
+            <div class="grid p-fluid">
+                <div class="col-12 md:col-3">
+                    <div class="flex flex-column gap-2">
+                        <label for="username"> Select Date From</label>
+                        <p-calendar [showIcon]="true" [(ngModel)]='fromdate' dateFormat="dd-M-yy" readonly required
+                            [style]="{'width': '100%'}" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="flex flex-column gap-2">
+                        <label for="username"> End Date</label>
+                        <p-calendar [showIcon]="true" [(ngModel)]='enddate' dateFormat="dd-M-yy" readonly required
+                            [style]="{'width': '100%'}" />
+                    </div>
+                </div>
+
+                <!-- <div class="col-12 sm:col-2 md:col-2">
+                        </div> -->
+                <div class="col-12 md:col-1">
+                    <div class="flex flex-column gap-2">
+                        <label>&nbsp;</label>
+                        <button pButton type="submit" (click)="filterData()" label="Filter"
+                            class="p-button-success"></button>
+                    </div>
+                </div>
+                <div class="col-12 md:col-2">
+                    <div class="flex flex-column gap-2">
+                        <label>&nbsp;</label>
+                        <p-splitButton label="Refresh" icon="pi pi-refresh" (onClick)="ReloadData()"
+                            class="p-button-secondary"></p-splitButton>
+                    </div>
+                </div>
+                <div class="col-12 md:col-3">
+                    <div class="flex flex-column gap-2">
+                        <label>&nbsp;</label>
+                        <p-button label="New Service Request" (click)="showDialog()" icon="pi pi-external-link"
+                            styleClass="p-button-danger"></p-button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="p-grid p-field" style="width: 100%;">
+                        <div class="p-field p-col">
+                            <label for="lastname3" class="p-col-fixed" style="width:70px">
+        
+                                <button pButton type="submit" (click)="filterData()" label="Filter"
+                                    class="ui-button-success"></button>
+                            </label>
+                            <label for="lastname3" class="p-col-fixed" style="width:150px">
+        
+                                <p-splitButton label="Refresh" icon="pi pi-refresh" (onClick)="ReloadData()" 
+                                    class="ui-button-secondary"></p-splitButton>
+                            </label>
+
+
+                    <div>
+                        <p-button label="New Service Request" (click)="showDialog()"  style="float: right; font-size: larger;" icon="pi pi-external-link"
+                        styleClass="ui-button-danger"></p-button>
+                        <br>
+                    </div>
+                        </div>
+                    <br>
+                    </div> -->
+            <div class="grid" style="width: 100%;">
+                <div class="col-12">
+                    <p-panel header="Details">
+                        <p-table [value]="ServiceDatas" [scrollable]="true" [rows]="100" scrollHeight="450px"
+                            columnResizeMode="expand">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width:3rem">Code</th>
+                                    <th style="width:15rem">Type</th>
+                                    <th style="width:15rem">Company Name</th>
+                                    <th style="width:12rem">Reason</th>
+                                    <!-- <th style="width:12rem">Staff Suggestions</th> -->
+                                    <th style="width:8rem">Date</th>
+                                    <th style="width:8rem">Status</th>
+                                    <th style="width:8rem">Action</th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-servicedata>
+                                <tr>
+                                    <td style="width:3rem">{{servicedata.serviceReqId}}</td>
+                                    <td style="width:15rem">{{servicedata.serviceReqTypeNavigation.serviceReqTypeName}}
+                                    </td>
+                                    <td style="width:15rem">{{servicedata?.companyName}}</td>
+                                    <td style="width:12rem">{{servicedata?.serviceReqReason}}</td>
+                                    <!-- <td style="width:12rem">{{servicedata?.serviceStaffReview}}</td> -->
+                                    <td style="width:8rem">{{servicedata?.serviceReqDate | date:'dd/MMM/yyyy'}}</td>
+                                    <td style="width:8rem">
+                                        <ng-container *ngIf="servicedata.serviceReqStatus === 0">
+                                            <span style='padding: 5px;
+                                           font-weight: bolder;color: rgba(100, 6, 138, 0.678);'>
+                                                Pending</span>
+                                        </ng-container>
+                                        <ng-container *ngIf="servicedata.serviceReqStatus === 1">
+                                            <span
+                                                style='padding: 5px;font-weight: bolder;color: rgb(28, 52, 128);'>Processed</span>
+                                        </ng-container>
+                                        <ng-container *ngIf="servicedata.serviceReqStatus === 2">
+                                            <span
+                                                style='padding: 5px;font-weight: bolder; font-size: x-large; color: rgb(15, 197, 46);'>Approved</span>
+                                        </ng-container>
+                                        <ng-container *ngIf="servicedata.serviceReqStatus === 3">
+                                            <span
+                                                style='padding: 5px;font-weight: bolder; font-size: x-large; color: rgb(189, 9, 24);'>Rejected</span>
+                                        </ng-container>
+                                    </td>
+
+                                    <td style="width:8rem">
+                                        <ng-container *ngIf="servicedata.serviceReqStatus === 0">
+                                            <p-button label="Delete" (click)='deleteService(servicedata.serviceReqId)'
+                                                styleClass="ui-button-danger"></p-button>
+                                        </ng-container>
+                                        <ng-container *ngIf="servicedata.serviceReqStatus === 1">
+                                            <p-button label="Delete" (click)='deleteService(servicedata.serviceReqId)'
+                                                styleClass="ui-button-danger"></p-button>
+                                            <!-- <button pButton type="button" label="Delete" class="p-button-rounded p-button-danger"  styleClass="ui-button-danger" (click)='deleteService(servicedata.serviceReqId)'></button> -->
+                                        </ng-container>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </p-panel>
+                </div>
+            </div>
+        </p-panel>
+    </div>
+</div>

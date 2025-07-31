@@ -1,0 +1,88 @@
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div *ngIf="status" style="text-align: center; z-index: 20000; width: 100%; top: 0px; position: fixed; background: red;  left: 0;">    
+    <h1>THERE IS NO INTERNET CONNECTION</h1>    
+    <img width="111px" src="../../../../assets/Images/neterror.png" alt="Wifi Connecred" />    
+</div>  
+<div class="layout-content" >
+ 
+    <div>
+        <form>
+            <!-- <agm-map style="height: 100vh;width:100%;display: block;" [latitude]="lat" [longitude]="lng" [zoom]="zoom" >
+            <agm-marker  [latitude]="lat" [longitude]="lng"></agm-marker>
+                  </agm-map> -->
+          </form>
+    </div>
+
+      
+<div id="map"></div>
+
+
+    <!-- -->
+
+    <p-dialog  [header]="title" 
+    [(visible)]="display" 
+     (onHide)="close()" 
+     class="dialog1" 
+    [breakpoints]="{'320px':'98vw' }"
+    [baseZIndex]="10000" >
+        <h3>{{Todaydate| date: 'fullDate'| uppercase}}</h3>
+
+        <h1 class="clock"><i class="fas fa-clock" formControlName="punchdate"></i>  {{date}}     
+        </h1>
+
+        <form [formGroup] = "attendanceForm" (ngSubmit)="onSubmit()"> 
+            
+            <h1><i class="fas fa-map-marker-alt"></i> 
+
+                <p-dropdown [options]="itemss" formControlName="projectID" 
+                [ngClass]="{ 'is-invalid': submitted && f.projectID.errors }" *ngIf="CheckInVisisble"></p-dropdown>
+                <b *ngIf="!CheckInVisisble">{{checkproject}}</b>
+                
+            </h1>
+            <div *ngIf="submitted && f.projectID.errors" style="color: red;" class="invalid-feedback">
+                <div *ngIf="f.projectID.errors.required">Project is required</div>
+            </div>
+            <h1><i class="fas fa-file"></i> 
+                <input 
+                formControlName="imageFile"
+                id="file" 
+                type="file" 
+                class="form-control"
+                (change)="onFileSelect($event)">
+            </h1>
+            <textarea rows="5" cols="30" formControlName="remarks" pInputTextarea></textarea> <br/>
+
+                <button pButton type="submit" hidden="process" (click)="docheckin(attendanceForm)" *ngIf="CheckInVisisble" icon="pi pi-check" style="padding:3px 15px; font-weight: 600; font-size: 15px;" label="Check-in" ></button>
+
+        </form>
+
+
+
+<!-- <div style="color:#888" *ngIf="!CheckInVisisble">
+    <span><i class="fa fa-circle" aria-hidden="true"></i> Check-in
+    </span>
+    <span><i class="fas fa-map-marker-alt"></i> {{checkinlocation}}</span>
+        <span><i class="fas fa-clock"></i>  {{checkintime}}     
+        </span>
+</div> -->
+        
+        <button pButton type="button" (click)="docheckout()" *ngIf="!CheckInVisisble" icon="pi pi-check" style="padding:3px 15px; font-weight: 600; font-size: 15px;" label="Check-out" class="ui-button-danger "></button>
+<span>
+    <br>
+    Last punching Time
+    <br>
+    <!-- <p>Formatted  Date: <b>{{ checkintime | date:'MM.dd.yyyy HH:mm' }}</b> </p> -->
+
+    {{checkintime | date: 'MMM d, y, H:mm:ss'}}
+    <!-- {{checkintime | utcToLocal:'dd.MM.yy - hh.mm a'}} -->
+
+</span>
+        <p-footer>
+    </p-footer>
+</p-dialog>
+    <p-sidebar position="center"  [baseZIndex]="10000">
+      
+    </p-sidebar>
+
+</div>

@@ -1,0 +1,114 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+
+<button pButton type="button" label="Reset" (click)='new()' icon="pi pi-delete"></button>
+<button pButton type="button" label="Save Timesheet" 
+    *ngIf="newTimesheetFlag" (click)='saveReceiptVoucher()' icon="fa fa-floppy-o" class="ui-button-success"></button>
+    <button pButton type="button" label="Update Timesheet" *ngIf="!newTimesheetFlag"
+    (click)='saveReceiptVoucher()' icon="fa fa-floppy-o" class="ui-button-danger"></button>
+
+<!-- <p-messages [value]="msgs" (change)="clearMessages()"></p-messages> -->
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<div class="card card-w-title" >
+
+    <div class="timeselector" >
+        <p-overlayPanel class="timeselector-overlay" #op>
+            <div class="timeselector-panel">
+                <p-calendar name="startAnalyze" [timeOnly]="true"></p-calendar>
+            </div>
+        </p-overlayPanel>
+    </div>
+    <div class="timeselector-preview" (click)="op.toggle($event)">
+    </div>
+
+
+    <div class="p-grid w-100">
+        <div class="p-sm-12 p-md-12 p-lg-12 w-100">
+            <!-- <p-panel>
+                        <p-header>
+                        Timesheet Details
+                        </p-header> -->
+            <div class="min-panel w-100">
+                <div class="p-grid inputGroup">
+                    <label class="p-col-12 p-md-12 p-lg-2" style="padding-top: 15px" for="TimesheetDate">{{'Timesheet Date'}}</label>
+                    <!-- <input class="p-col-12 p-md-12 p-lg-4" id="voucherdate" pInputText> -->
+                    <div class="p-col-12 p-md-12 p-lg-3" >
+                        <p-calendar [style]="{'width':'100%'}" useUtc dateFormat='dd/mm/yy' id="TimesheetDate"
+                            [(ngModel)]="date1" (ngModelChange)="GetTimeSheetData()">
+                            <!-- id="TimesheetDate" [(ngModel)]="bindingFromDate" (ngModelChange)="GetTimeSheetData()"> -->
+                        </p-calendar>
+
+                        <div class="error" *ngIf="f.TimesheetDate.errors 
+                                    && (f.TimesheetDate.dirty || f.TimesheetDate.touched)">
+                            <span *ngIf="f.TimesheetDate.errors.required">
+                                TimesheetDate date is Mandatory Field*</span>
+                        </div>
+                    </div>
+
+                </div>
+                 <div id='gridid' class="p-grid w-100">
+                    <div class="p-col-12 parent-container">
+                        <div class="container"> 
+
+                            <!-- <hot-table [hotId]="hotid" [licenseKey]="licensekey" *ngIf="  tableActive"
+                                [beforeChange]="onBeforeChange" [settings]="timesheetEntry" [data]="timesheetData">
+                            </hot-table> -->
+
+                            <p-table [value]="timesheetData" [rows]="100" columnResizeMode="expand">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width:7rem">Project</th>
+                                        <th style="width:6rem">Start Time</th>
+                                        <th style="width:6rem">End time</th>
+                                        <th style="width:6rem">End Date</th>
+                                        <th style="width:6rem">Description</th>                
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body"  let-timesheetData let-ri="rowIndex" >
+                                    <tr>
+                                        <td >
+                                            <p-dropdown [(ngModel)]='timesheetData.timesheetDataProject.projectId' (onBlur)='addNewRow($event,timesheetData,ri)'
+                                                [options]="projectList" [filter]="true"   >
+                                            </p-dropdown>
+                                        </td>
+                                        <td>
+                                            <p-calendar  [inputStyle] = "{'width':'100%'}" (onBlur)='addNewRow($event,timesheetData,ri)'
+                                        timeOnly = "true" [(ngModel)]='timesheetData.startTime' 
+                                        dateFormat='HH:MM:SS' id="TimesheetDateStarttime">
+                                        </p-calendar>
+                                        </td>
+                                        <td>
+                                            <p-calendar [inputStyle] = "{'width':'100%'}" timeOnly = "true" [(ngModel)]='timesheetData.endTime' (onBlur)='addNewRow($event,timesheetData,ri)' id="TimesheetDateendtime">
+                                        </p-calendar>
+                                        </td>
+                                      <td>
+                                        <p-calendar [inputStyle] = "{'width':'100%'}"  [(ngModel)]='timesheetData.endDate' name="date" dateFormat='dd/mm/yy' id="TimesheetDate"
+                                         >
+                                    </p-calendar>
+                                      </td>
+                                      <td>
+                                        <textarea pInputTextarea rows="1" [(ngModel)]='timesheetData.description' pInputTextarea autoResize="autoResize">
+                                            <!-- {{timesheetData.description}} -->
+                                        </textarea>
+                                        </td>
+
+                                        <!-- <td style="width:4rem">{{timesheetData.timesheetDataProject.projectName}}</td>
+                                        <td style="width:6rem">{{timesheetData.startTime}}</td>
+                                        <td style="width:6rem">{{timesheetData.endTime}}</td>
+                                        <td style="width:6rem">{{timesheetData.endDate}}</td>
+                                        <td style="width:6rem">{{timesheetData.description}}</td> -->
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

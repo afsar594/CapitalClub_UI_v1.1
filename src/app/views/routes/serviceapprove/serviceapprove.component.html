@@ -1,0 +1,151 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<div class="layout-content">
+
+    <!-- <p-dialog header="+Service Request" [(visible)]="display" [style]="{width: '50vw'}" [baseZIndex]="10000">
+        <app-new-service (valueChange)='ReloadData()'></app-new-service>
+        <p-footer>
+        </p-footer> 
+    </p-dialog> -->
+
+
+    <!-- <p-button label="+Service Request" (click)="showDialog()" style="float: right;" icon="pi pi-external-link"
+            styleClass="ui-button-danger"></p-button> -->
+    <p-panel header="Service Request Details">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="username"> Staff Name</label>
+                    <p-dropdown [options]="staffList" placeholder="Select Staff" [(ngModel)]="empName"
+                        [style]="{'width': '100%'}" [showClear]="true" [filter]="true"></p-dropdown>
+                </div>
+            </div>
+            <div class="col-12 md:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="username"> Select Date From</label>
+                    <p-calendar [showIcon]="true" [(ngModel)]='fromdate' dateFormat="dd-M-yy" readonly required
+                        [style]="{'width': '100%'}" />
+                </div>
+            </div>
+            <div class="col-12 md:col-2">
+                <div class="flex flex-column gap-2">
+                    <label for="username"> End Date</label>
+                    <p-calendar [showIcon]="true" [(ngModel)]='enddate' dateFormat="dd-M-yy" readonly required
+                        [style]="{'width': '100%'}" />
+                </div>
+            </div>
+            <div class="col-12 md:col-2">
+                <div class="flex flex-column gap-2">
+                    <label for="username"> Select Company</label>
+                    <p-dropdown [options]="companies" placeholder="Select Company" [(ngModel)]="filtercompany"
+                        [style]="{'width': '100%'}" [showClear]="true"></p-dropdown>
+                </div>
+            </div>
+            <div class="col-12 md:col-2">
+                <div class="flex flex-column gap-2">
+                    <label for="username"> Service Type</label>
+                    <p-dropdown [style]="{'width': '100%'}" placeholder="Select Request Type" [options]="ServiceType"
+                        [(ngModel)]="serviceTypee" optionLabel="serviceReqTypeName" [showClear]="true"></p-dropdown>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="field col-12 md:col-2">
+                    <div class="field col">
+                       
+                        <label for="username"> Select Company</label>
+                        <p-dropdown [options]="null" placeholder="Select Company" [(ngModel)]="filtercompany"
+                            [showClear]="true"></p-dropdown>
+                    </div>
+                    </div> -->
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-2">
+                <div class="flex flex-column gap-2">
+                    <label for="lastname2">
+                        <button pButton type="submit" (click)="filterData()" label="Filter"
+                            class="p-button-success"></button>
+                    </label>
+                </div>
+            </div>
+            <div class="col-12 md:col-2">
+                <div class="flex flex-column gap-2">
+                    <label for="lastname2">
+                        <p-splitButton label="Refresh" icon="pi pi-refresh" (onClick)="ReloadData()"
+                            class="p-button-secondary"></p-splitButton>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- IInd row-->
+        <!-- <div class="p-field p-grid">
+                <div class="p-field p-col">
+
+                    <label for="lastname3" class="p-col-fixed" style="width:250px">Staff Name<br />
+                        <input id="tbSearchStaffName" [(ngModel)]='empName' type="text"  pInputText> 
+                   </label>
+
+                    <!-- <label for="lastname3" class="p-col-fixed" style="width:250px">End Date <br />
+                        <p-calendar [showIcon]="true" [(ngModel)]='enddate' dateFormat="dd-M-yy" readonly required>
+                        </p-calendar>
+                    </label> -->
+        <!-- <label for="lastname3" class="p-col-fixed" style="width:70px">
+
+                        <button pButton type="submit" (click)="filterData()" label="Filter"
+                            class="ui-button-success"></button>
+                    </label>
+                    <label for="lastname3" class="p-col-fixed" style="width:150px">
+
+                        <p-splitButton label="Refresh" icon="pi pi-refresh" (onClick)="ReloadData()" 
+                            class="ui-button-secondary"></p-splitButton>
+                    </label> 
+                </div>
+
+            </div> -->
+
+
+        
+    </p-panel>
+    <p-panel header="Details">
+        <p-table [value]="ServiceDatas" [scrollable]="true" [rows]="100" scrollHeight="450px"
+            columnResizeMode="expand">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:3rem">Code</th>
+                    <th style="width:14rem">Staff Name</th>
+                    <th style="width:14rem">Company Name</th>
+                    <th style="width:10rem">Type</th>
+                    <th style="width:13rem">Reason</th>
+                    <th style="width:8rem">Date</th>
+                    <th style="width:8rem">Status</th>
+                    <th style="width:8rem">Action</th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-servicedata>
+                <tr>
+                    <td style="width:3rem">{{servicedata.serviceReqId}}</td>
+                    <td style="width:8rem">{{servicedata.hruser}}</td>
+                    <td style="width:12rem">{{servicedata.companyName}}</td>
+                    <td style="width:15rem">{{servicedata.serviceReqTypeNavigation.serviceReqTypeName}}
+                    </td>
+                    <td style="width:12rem">{{servicedata.serviceReqReason}}</td>
+                    <td style="width:8rem">{{servicedata.serviceReqDate | date: 'dd/MMM/yyyy' }}</td>
+                    <td style="width:8rem">
+                        <ng-container *ngIf="servicedata.serviceReqStatus === 0">
+                            Pending
+                        </ng-container>
+                        <ng-container *ngIf="servicedata.serviceReqStatus === 1">
+                            Processed
+                        </ng-container>
+                    </td>
+
+                    <td style="width:7rem">
+                        <button pButton type="button" label="Approve"
+                            class="p-button-rounded p-button-danger"
+                            (click)='Aprovalforward(servicedata.serviceReqId)'></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-panel>
+</div>

@@ -1,0 +1,28 @@
+//  @import url("../../../../assets/layout/css/layout-fly.scss");
+
+//  @import '../../../../assets/layout/css/layout-fly';
+
+// .login-panel {
+//     background-color: #fdfdfd;
+// }
+// .login-body{
+//     height: 100%;
+// }
+
+// .invalid-feedback{
+//     color:#dc3545;
+//     font-weight: 600;
+// }
+ .custom-img{
+    width: 730px !important;
+}
+.h-full
+ {
+    height: 100% !important;
+    margin-top: 10px;
+}
+@media (min-width: 1024px) {
+  .custom-img {
+    width: 730px;
+  }
+}

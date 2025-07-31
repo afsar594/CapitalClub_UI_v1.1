@@ -1,0 +1,147 @@
+[
+  {
+    "label": "Dashboard",
+    "icon": "fa fa-fw fa-home",
+    "privilages": [
+      1,
+      2
+    ],
+    "routerLink": [
+      "/user/dashboard"
+    ]
+  },
+  {
+    "label": "Leave Details",
+    "icon": "fa fa-fw fa-sign-in",
+    "privilages": [
+      1,
+      2
+    ],
+    "items": [
+      {
+        "label": "Leave Requests",
+        "icon": "fa fa-fw fa-calendar-week",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/user/leavedata"
+        ]
+      },
+      {
+        "label": "Leave Approval",
+        "icon": "fa fa-fw fa-calendar-week",
+        "privilages": [
+          1
+        ],
+        "routerLink": [
+          "/user/leaveapprove"
+        ]
+      },
+      {
+        "label": "Leave Approved",
+        "icon": "fa fa-fw fa-calendar-week",
+        "privilages": [
+          1
+        ],
+        "routerLink": [
+          "/user/leaveapproved"
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Memo ",
+    "icon": "fa fas fa-tasks",
+    "privilages": [
+      1,
+      2,
+      4
+    ],
+    "routerLink": [
+      "/user/memo"
+    ]
+  },
+  {
+    "label": "Service Details",
+    "icon": "fa fa-fw fa-gg",
+    "privilages": [
+      1,
+      2
+    ],
+    "items": [
+      {
+        "label": "Service Request ",
+        "icon": "fa fa-fw  fa-paper-plane",
+        "privilages": [
+          1,
+          2
+        ],
+        "routerLink": [
+          "/user/service"
+        ]
+      },
+      {
+        "label": "Service Approval ",
+        "icon": "fa fa-fw  fa-paper-plane",
+        "privilages": [
+          1
+        ],
+        "routerLink": [
+          "/user/serviceapprove"
+        ]
+      },
+        {
+        "label": "Service History Report",
+        "icon": "fa fa-fw  fa-paper-plane",
+        "privilages": [
+          1
+        ],
+        "routerLink": [
+          "/user/historyreport"
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Timesheet Multi Staff",
+    "icon": "fa fa-fw fas fa-user-clock",
+    "privilages": [
+      0
+    ],
+    "routerLink": [
+      "/user/timesheet"
+    ]
+  },
+  {
+    "label": "Individual Timesheet ",
+    "icon": "fa fa-fw fas fa-user-clock",
+    "privilages": [
+      0
+    ],
+    "routerLink": [
+      "/user/timesheetsingle"
+    ]
+  },
+  {
+    "label": "Attendance ",
+    "icon": "fa fa-fw fas fa-user-clock",
+    "privilages": [
+      0
+    ],
+    "routerLink": [
+      "/user/attendance"
+    ]
+  },
+    {
+    "label": "Login New ",
+    "icon": "fa fa-fw fas fa-user-clock",
+    "privilages": [
+      0
+    ],
+    "routerLink": [
+      "/user/loginnew"
+    ]
+  }
+]

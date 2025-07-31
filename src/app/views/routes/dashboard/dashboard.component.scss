@@ -1,0 +1,39 @@
+h2{
+    font-weight: bold;
+    font-size: 14px;
+    padding: 0;
+    margin: 0em;
+}
+h1{
+    margin: 2px;
+    font-size: 14px;
+    padding: 2px;
+}
+.cardmenu{
+    background:#0d526b !important;
+    text-align: center;
+    color: #ffffff;
+}
+.col{
+    border:1px dashed #ddd;
+}
+.overview-box-count h1 a{
+    color: #007AD9;
+
+}
+.overview-box-count h1 a:hover{
+    color: #d9dee2;
+
+}
+::ng-deep{
+    p-button{
+    background-color:#0d526b !important;
+    text-align: center;
+    color: #ffffff;
+    }
+}
+// :host {
+//   display: block;
+//   max-width: 30rem;
+// }
+

@@ -1,0 +1,74 @@
+<!-- <p-toast [style]="{marginTop: '80px'}"></p-toast> -->
+
+<!-- FORM START-->
+<!-- <form [formGroup]="serviceForm" (ngSubmit)="onSubmit(serviceForm.value)"> -->
+
+<div class="toolbar">
+  <div class="ui-toolbar-group-left">
+    <button pButton type="button" [label]="btnFlag.save == true ? 'Save' : 'Update'"
+      (click)="onSubmit(serviceForm.value)" icon="fa fa-floppy-o" class="ui-button-success" style="margin-right: 10px;">
+    </button>
+    <button pButton type="button" label="Exit" (click)="ExitNew()" class="ui-button-danger" icon="fa fa-sign-out">
+    </button>
+  </div>
+</div>
+
+<div class="card card-w-title" [formGroup]="serviceForm">
+  <p-panel header="Service Request">
+    <div class="grid p-fluid">
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column gap-2">
+          <label for="serviceType">Service Type</label>
+          <p-dropdown placeholder="Select Request Type" [options]="ServiceType" formControlName="serviceType"
+            optionLabel="serviceReqTypeName" [showClear]="true"></p-dropdown>
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="flex flex-column gap-2">
+          <label for="reqdate">Service Date</label>
+          <p-calendar id="reqdate" formControlName="reqdate" dateFormat="dd/MM/yy" readonly style="width: 100%;">
+          </p-calendar>
+          <p-message severity="error" text="Required"
+            *ngIf="serviceForm.controls['reqdate'].invalid && serviceForm.controls['reqdate'].dirty">
+          </p-message>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Staff Review -->
+    <!-- <div class="p-field p-grid p-align-center" style="margin-bottom: 20px;">
+                            <label for="serviceType" class="p-col-fixed" style="width: 120px;">Staff Suggestions and Feedback</label>
+                            <div class="p-col">
+                                <textarea
+                                id="ServiceStaffReview"
+                                rows="3"
+                                formControlName="ServiceStaffReview"
+                                pInputTextarea
+                                style="width: 100%;">
+                              </textarea>
+                              <p-message
+                                severity="error"
+                                text="Required"
+                                *ngIf="serviceForm.controls['ServiceStaffReview'].invalid && serviceForm.controls['ServiceStaffReview'].dirty">
+                              </p-message>
+                            </div>
+                          </div> -->
+    <!-- Request Reason -->
+    <div class="p-field p-grid">
+      <div class="col-12 md:col-12">
+        <div class="flex flex-column gap-2">
+          <label for="serviceReqReason">Request Reason<span class="mand_star">*</span></label>
+          <textarea id="serviceReqReason" rows="3" formControlName="serviceReqReason" pInputTextarea
+            style="width: 100%;">
+                  </textarea>
+        </div>
+      </div>
+    </div>
+  </p-panel>
+</div>
+
+
+
+<!-- FORM END -->
+<!-- </form> -->

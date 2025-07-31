@@ -1,0 +1,77 @@
+@import '../_variables';
+
+/* Icons */
+$iconFontSize:1em;
+$iconWidth:1em;
+
+$inputGroupAddonBgColor:#e6e6e6;
+
+/* Error */
+$errorColor:#f28a8b;
+
+/*  Invalid Input */
+$inputInvalidBorderColor:#e17576;
+$inputInvalidBgColor:#ffffff;
+
+/* Headers */
+$headerBgColor:#f5f8f9;
+$headerHoverBgColor:#f1f2f7;
+$headerTextColor:#2d353c;
+$headerBorderColor:#dce2e7;
+$headerIconColor:#2d353c;
+$headerIconHoverColor:#2d353c;
+$headerPadding:.5em 1em;
+
+/* Contents */
+$contentPadding:.5em 1em;
+$contentBorderColor:#dce2e7;
+$contentBgColor:#f5f8f9;
+
+/* Forms */
+$inputBgColor:#ffffff;
+$inputPadding: 4px;
+$inputBorderColor:#dce2e7;
+$inputHoverBorderColor:#a8b4be;
+
+/* Buttons */
+$buttonTextColor:#ffffff;
+$toggleButtonBgColor:#c6cbcf;
+
+/* List Items */
+$listItemPadding:.5em 1em;
+$listItemHoverBgColor:#dce2e7;
+$listItemHoverTextColor:#525262;
+
+/* Messages */
+$successMessageBgColor:#dff0d8;
+$successMessageTextColor:#3c763d;
+$successMessageBorderColor:#d6e9c6;
+$infoMessageBgColor:#d9edf7;
+$infoMessageTextColor:#31708f;
+$infoMessageBorderColor:#faebcc;
+$warnMessageBgColor:#fcf8e3;
+$warnMessageTextColor:#8a6d3b;
+$warnMessageBorderColor:#434560;
+$errorMessageBgColor:#f0d1d0;
+$errorMessageTextColor:#2d353c;
+$errorMessageBorderColor:#e96d66;
+
+/* Data */
+$datatableCellBorderColor:#dbe1e6;
+$datableEvenRowBgColor:#ffffff;
+$datableOddRowBgColor:#f5f8f9;
+
+$paginatorBgColor:#ffffff;
+$paginatorHoverBgColor:#dce2e7;
+$datatableHoverBgColor:#dce2e7;
+
+/* TabView */
+$tabHeaderPadding:.6em 1em;
+
+/* Menu */
+$menuHeaderBgColor:#dcdfe0;
+$menuHeaderHoverBgColor:#c4c6c7;
+
+/* Panel */
+$panelContentBorderColor:#DCE1E7;
+$panelHoverBgColor:#dcdfe0;

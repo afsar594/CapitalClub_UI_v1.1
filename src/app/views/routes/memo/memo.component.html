@@ -1,0 +1,31 @@
+<div class="layout-content">
+    
+    <p-panel header="MEMOS" [style]="{minHeight: '360px'}">
+
+      <div class="p-col-12">
+
+        <p-table [value]="memodatas" [scrollable]="true" [rows]="100" scrollHeight="250px" columnResizeMode="expand">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:4rem">Memo ID</th>
+                    <th style="width:8rem">Date</th>
+                    <th style="width:8rem">Reply</th>
+                    <th style="width:8rem">Remarks</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-memodata>
+                <tr>
+                    <td style="width:4rem">{{memodata.memoId}}</td>
+                    <td style="width:8rem">{{memodata.memoDate | date:"dd/MMM/yyyy"}}</td>
+                    <td style="width:8rem">{{memodata.reply}}</td>
+                    <td style="width:8rem">{{memodata.remarks}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        </div>
+        <!-- <hot-table
+        [settings]="tableSettings"
+        [data]="memodatas">
+      </hot-table> -->
+    </p-panel>
+</div>

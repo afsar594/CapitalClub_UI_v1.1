@@ -1,0 +1,214 @@
+<!-- <div class="login-body">
+  <div class="login-panel p-fluid">
+    <div class="grid  justify-content-center">
+      <div class="col-12">,
+
+        <div class="card flex justify-content-center">
+            <p-image 
+            src="../../../../assets/Images/logo-2.png"                
+                alt="Image" 
+                width="250" 
+                [preview]="true" />
+        </div>
+
+
+
+ 
+      </div>
+      <div class="col-12 logo-container">
+        <div class="flex flex-wrap gap-3">
+
+          <h1>Login To Your Account</h1>
+          <h2>WELCOME TO INSPIRE SYSTEM</h2>
+        </div>
+
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="col-12">
+          <div class="input-wrapper">
+            <input type="text" autocomplete="off" placeholder="Username" pInputText formControlName="username"
+              [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+              <div *ngIf="f.username.errors.required">Username is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-wrapper">
+            <input type="password" autocomplete="off" placeholder="Password" pInputText formControlName="password"
+              [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 button-container">
+
+          <p-button label="Sign in" type="submit" [raised]="true" />
+
+   
+          <p-progressSpinner *ngIf="loading"></p-progressSpinner>
+        </div>
+        <div *ngIf="error" style="   color:#dc3545;">{{error}}</div>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<!-- <body class="m-0 p-0 overflow-hidden h-screen w-screen">
+  <div class="grid h-screen w-screen m-0 p-0 overflow-hidden">
+    <div class="col-12 md:col-5 h-screen flex items-center justify-center bg-white">
+      <img src="assets/Images/new1.jpg" alt="SUNNY Management Group" class="h-full w-auto object-contain" />
+    </div>
+     <div class="col-12 md:col-6 flex align-items-center justify-content-center h-screen p-4">
+      <form [formGroup]="loginForm" class="w-full max-w-30rem surface-card p-4 shadow-2 border-round">
+        
+        <div class="flex justify-content-center mb-3 gap-2 flex-wrap">
+          <img src="assets/Images/DSH1.png" alt="Dr Sunny Home Health" class="h-3rem" />
+          <img src="assets/Images/dsmc.png" alt="Dr Sunny Medical" class="h-3rem" />
+        </div>
+
+        <div class="text-center mb-4">
+          <h3 class="text-2xl font-semibold mb-1">Sign In</h3>
+          <p class="text-sm text-gray-600">Please enter your details to sign in</p>
+        </div>
+
+     <div class="field mb-3">
+  <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
+  <span class="p-input-icon-right w-full">
+    <input
+      id="email"
+      type="text"
+      autocomplete="off"
+      placeholder="Username"
+      pInputText
+      formControlName="username"
+      class="w-full"
+      [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+    <i class="pi pi-envelope"></i>
+  </span>
+  <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+    <div *ngIf="f.username.errors.required">Username is required</div>
+  </div>
+</div>
+
+
+         <div class="field mb-3">
+  <label for="password" class="block text-sm font-medium mb-1">Password</label>
+  <span class="p-input-icon-right w-full">
+    <input
+      id="password"
+      type="password"
+      autocomplete="off"
+      placeholder="Password"
+      pInputText
+      formControlName="password"
+      class="w-full"
+      [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+    <i class="pi pi-lock"></i>
+  </span>
+  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+    <div *ngIf="f.password.errors.required">Password is required</div>
+  </div>
+</div>
+
+
+         <div class="flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+          <div class="flex align-items-center">
+            <p-checkbox inputId="remember" binary="true"></p-checkbox>
+            <label for="remember" class="ml-2 text-sm">Remember Me</label>
+          </div>
+         </div>
+
+         <button pButton label="Sign In"
+                (click)="onSubmit()"
+                class="w-full p-button-sm p-button-rounded p-button-warning mb-3">
+        </button>
+
+        <p class="text-sm text-center">
+          Don’t have an account?
+          <a href="#" class="text-orange-500 font-semibold">Create Account</a>
+        </p>
+
+      </form>
+    </div>
+  </div>
+</body> -->
+
+<body class="m-0 p-0 h-screen w-screen lg:overflow-hidden sm:overflow-auto">
+  <div class="grid m-0 p-0 h-screen w-screen">
+ 
+  <div class="col-12 md:col-5 h-screen flex items-center justify-center bg-white">
+      <img src="assets/Images/new1.jpg" alt="SUNNY Management Group"class="h-full w-auto max-w-full object-contain custom-img" />
+    </div>
+
+    <!-- RIGHT SIDE (form), with scroll only on small screens -->
+     
+   <div class="col-12 md:col-7 flex align-items-center justify-content-center h-screen p-4">
+      <form [formGroup]="loginForm" class="w-full max-w-30rem surface-card p-4 shadow-2 border-round">
+          <div class="flex justify-content-center mb-3 gap-2 mt-4 flex-wrap">
+            <img src="assets/Images/DSH1.png" alt="Dr Sunny Home Health" class="h-3rem" />
+            <img src="assets/Images/dsmc.png" alt="Dr Sunny Medical" class="h-3rem" />
+          </div>
+
+          <div class="text-center mb-4">
+            <h3 class="text-2xl font-semibold mb-1">Sign In</h3>
+            <p class="text-sm text-gray-600">Please enter your details to sign in</p>
+          </div>
+
+          <div class="field mb-3">
+            <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
+            <span class="p-input-icon-right w-full">
+              <input id="email" type="text" autocomplete="off" placeholder="Username" pInputText
+                formControlName="username" class="w-full"
+                [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+              <i class="pi pi-envelope"></i>
+            </span>
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+              <div *ngIf="f.username.errors.required"><span style="   color:#dc3545; margin-left: 136px;" >Username is required</span></div>
+            </div>
+          </div>
+
+
+          <div class="field mb-3">
+            <label for="password" class="block text-sm font-medium mb-1">Password</label>
+            <span class="p-input-icon-right w-full">
+              <input id="password" type="password" autocomplete="off" placeholder="Password" pInputText
+                formControlName="password" class="w-full"
+                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+              <i class="pi pi-lock"></i>
+            </span>
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required"><span style="   color:#dc3545;  margin-left: 136px;">Password is required</span></div>
+            </div>
+          </div>
+
+
+          <div class="flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+            <div class="flex align-items-center">
+              <p-checkbox inputId="remember" binary="true"></p-checkbox>
+              <label for="remember" class="ml-2 text-sm">Remember Me</label>
+            </div>
+          </div>
+          <button  pButton label="Sign In" (click)="onSubmit()"
+            class="w-full p-button-sm p-button-rounded p-button-warning mb-3">
+          </button>
+          <div class="card flex justify-content-center">
+            
+<p-progressSpinner *ngIf="loading"
+    styleClass="w-4rem h-4rem" 
+    strokeWidth="8" 
+    fill="var(--surface-ground)" 
+    animationDuration=".5s" />
+              <div *ngIf="error" style="   color:#dc3545;">{{error}}</div>
+          </div>
+          <p class="text-sm text-center">
+            Don’t have an account?
+            <a href="#" class="text-orange-500 font-semibold">Create Account</a>
+          </p>
+
+        </form>
+     </div>
+
+  </div>
+</body>

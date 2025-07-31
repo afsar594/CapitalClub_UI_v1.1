@@ -1,0 +1,90 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<!-- FORM START-->
+<form [formGroup]="leaveform" (ngSubmit)="onSubmit(leaveform.value)">
+    <div class="p-field p-grid">
+        <div class="p-field p-col">
+
+            <button pButton type="submit" [disabled]="!leaveform.valid" label="Send Leave request"
+                class="ui-button-success"></button>
+        </div>
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-field p-col">
+            <label for="leavetype" class="p-col-fixed" style="width:120px">Leave Type<span
+                    class="mand_star">*</span></label>
+
+            <p-dropdown placeholder="-----Select Type-----" [options]="leaveTypes" formControlName="leavetype"
+                optionLabel="leaveType" [showClear]="true"></p-dropdown>
+            <br>
+            <p-message severity="error" text="Required"
+                *ngIf="!leaveform.controls['leavetype'].valid&&leaveform.controls['leavetype'].dirty"></p-message>
+
+        </div>
+        <div class="p-field p-col">
+
+            <label for="lastname3" class="p-col-fixed" style="width:120px">Request Date</label>
+
+            <input id="lastname3" type="text" pInputText value="{{TodayDate | date:'yyyy-MM-dd'}}" readonly>
+        </div>
+    </div>
+    <!-- IInd row-->
+    <div class="p-field p-grid">
+        <div class="p-field p-col">
+            <label for="lastname3" class="p-col-fixed" style="width:120px">From Date<span
+                    class="mand_star">*</span></label>
+
+            <p-calendar [showIcon]="true" formControlName="fromdate" [(ngModel)]="bindingFromDate"
+                (onSelect)="UpdateDate(leaveform.value)" dateFormat="dd/M/yy" readonly></p-calendar>
+            <br>
+            <p-message severity="error" text="Required"
+                *ngIf="!leaveform.controls['fromdate'].valid&&leaveform.controls['fromdate'].dirty"></p-message>
+
+        </div>
+        <div class="p-field p-col">
+
+            <label for="lastname3" class="p-col-fixed" style="width:120px">End Date<span
+                    class="mand_star">*</span></label>
+
+            <p-calendar [showIcon]="true" formControlName="enddate" [(ngModel)]="bindingEndDate"
+                (onSelect)="UpdateDate(leaveform.value)" dateFormat="dd/M/yy" readonly></p-calendar>
+            <br>
+            <p-message severity="error" text="Required"
+                *ngIf="!leaveform.controls['enddate'].valid&&leaveform.controls['enddate'].dirty"></p-message>
+        </div>
+    </div>
+     <!-- IIIrd row-->
+     <div class="p-field p-grid">
+        <div class = "p-field p-col">
+            <h1><i class="fas fa-file"></i> 
+                <input formControlName="imageFile" id="file" type="file"  class="form-control"
+                (change)="onFileSelect($event)">
+            </h1>
+        </div>
+    </div>
+
+     <!-- IV th row-->
+    
+    <div class="p-field p-grid">
+        <div class="p-field p-col">
+            <h3 for="lastname3" class="p-col-fixed" style="width:90px">Reason<span class="mand_star">*</span></h3>
+        </div>
+        <div class="p-field p-col">
+            <textarea rows="4" cols="50" formControlName="reason" pInputTextarea autoResize="autoResize"></textarea>
+            <br>
+            <p-message severity="error" text="Required"
+                *ngIf="!leaveform.controls['reason'].valid&&leaveform.controls['reason'].dirty"></p-message>
+
+        </div>
+        <div class="p-field p-col">
+            <button pButton type="button" label="DAYS" class="ui-button-warning">
+                <h1>{{totalDays}}</h1>
+            </button>
+        </div>
+    </div>
+   <!-- IIIrd row-->
+    <!-- <hr /> -->
+    
+
+    <!-- FORM END -->
+</form>

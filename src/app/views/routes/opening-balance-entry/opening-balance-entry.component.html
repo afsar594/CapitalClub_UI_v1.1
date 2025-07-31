@@ -1,0 +1,118 @@
+<div class="layout-content">
+
+    <p-panel header="Opening Balance New Entry" [style]="{minHeight: '360px'}">
+        <div class="p-grid">
+            <div class="p-col-2 p-md-2 p-lg-1">
+                <div class="ui-g card overview-box overview-box-1 cardmenu">
+                   
+                    <div class="ui-g-12">
+                        <span class="overview-box-count"><h1 style="color: #3CB371;">   <i class="pi pi-plus"></i>
+                            <b>New</b></h1></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-col-2 p-md-2 p-lg-1">
+                <div class="ui-g card overview-box overview-box-1 cardmenu">
+                   
+                    <div class="ui-g-12">
+                        <span class="overview-box-count"><h1>   <i class="pi pi-pencil"></i>
+                            <b>Edit</b></h1></span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-2 p-md-2 p-lg-1">
+                <div class="ui-g card overview-box overview-box-1 cardmenu">
+                   
+                    <div class="ui-g-12">
+                        <span class="overview-box-count"><h1 style="color: #DC143C;">   <i class="pi pi-pencil"></i>
+                            <b>Cancel</b></h1></span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-2 p-md-2 p-lg-1">
+                <div class="ui-g card overview-box overview-box-1 cardmenu">
+                   
+                    <div class="ui-g-12">
+                        <span class="overview-box-count"><h1>   <i class="pi pi-save"></i>
+                            <b>Save</b></h1></span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-2 p-md-2 p-lg-1">
+                <div class="ui-g card overview-box overview-box-1 cardmenu">
+                   
+                    <div class="ui-g-12">
+                        <span class="overview-box-count"><h1>   <i class="pi pi-list"></i>
+                            <b>List</b></h1></span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-2 p-md-2 p-lg-1">
+                <div class="ui-g card overview-box overview-box-1 cardmenu">
+                   
+                    <div class="ui-g-12">
+                        <span class="overview-box-count"><h1>   <i class="pi pi-money-bill"></i>
+                            <b>Acc</b></h1></span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-2 p-md-2 p-lg-1">
+                <div class="ui-g card overview-box overview-box-1 cardmenu">
+                   
+                    <div class="ui-g-12">
+                        <span class="overview-box-count"><h1 style="color: #DC143C;">   <i class="pi pi-circle-off"></i>
+                            <b>Delete</b></h1></span>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="p-grid">
+        <div class="p-field p-grid">
+            <label for="firstname3" class="p-col-fixed" style="width:150px"><b>ID</b></label>
+            <div class="p-col">
+                <input id="firstname3" type="text" pInputText> 
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="lastname3" class="p-col-fixed" style="width:50px"></label>
+
+            <div class="p-col">
+                <p-calendar></p-calendar>
+            </div>
+        </div>
+        <div class="p-field p-grid">
+            <label for="lastname3" class="p-col-fixed" style="width:50px"></label>
+            <div class="p-col">
+                <p-dropdown  optionLabel="name" [filter]="true" [showClear]="true" placeholder=""></p-dropdown>
+            </div>
+        </div>
+            </div>
+            <br/>
+
+            <div class="p-grid">
+                <div class="p-field p-grid" style="width:450px">
+                    <label for="Accountno" class="p-col-fixed"style="width:150px" ><b>Account No:</b></label>
+                    <div class="p-col-6 p-md-6 p-lg-6">
+                        <input id="Accountno" type="text"  style="width:350px; background-color: #FFFF66;" pInputText> 
+                    </div>
+                </div>
+               
+                <div class="p-field p-grid">
+                    <label for="lastname3" class="p-col-fixed" style="width:100px"></label>
+                    <div class="p-col">
+                        <p-dropdown  optionLabel="name" [filter]="true" [showClear]="true" placeholder=""></p-dropdown>
+                        </div>
+                </div>
+                    </div>
+
+                    <p-panel header="Entries" style="background-color: #ddd ;">
+                        <hot-table
+                        [settings]="tableSettings"
+                        >
+                      </hot-table>
+                    </p-panel>
+</p-panel>
+
+</div>

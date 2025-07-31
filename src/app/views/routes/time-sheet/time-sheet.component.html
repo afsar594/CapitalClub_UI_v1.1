@@ -1,0 +1,123 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<div class="layout-content">
+
+    <p-dialog header="Multi Staff New Timesheet" [(visible)]="displaynew" [style]="{width: '90vw'}"
+        [baseZIndex]="10000">
+        <app-timesheet-multistaff (valueChange)='ReloadDataMulti()'></app-timesheet-multistaff>
+        <p-footer>
+            <button type="button" pButton icon="pi pi-times" (click)="display=false" label="Cancel"
+                class="p-button-secondary"></button>
+        </p-footer>
+    </p-dialog>
+
+    <p-panel header="Time sheets ">
+        
+
+        <div class="grid">
+            <div class="col-3">
+                <div class="grid">
+                  
+                    <div class="sm:col-4 md:col-4 lg:col-4">
+                        <label>Select Year</label>
+                    </div>
+                    <div class="sm:col-8 md:col-8 lg:col-8">
+                        <p-dropdown [options]="years" [(ngModel)]="filteryrear" optionLabel="name"
+                            placeholder="Select Year" [style]="{'width': '100%'}" />
+                       
+                    </div>
+
+                </div>
+                <div class="grid">
+                    <div class="sm:col-4 md:col-4 lg:col-4">
+                        Select Month
+                    </div>
+                    <div class="sm:col-4 md:col-4 lg:col-4">
+                            <p-dropdown [options]="months" [(ngModel)]="filtermonth" optionLabel="name"
+                            placeholder="Select Month" [style]="{'width': '100%'}" />
+                    </div>
+
+                </div>
+
+                <div class="grid">
+                    <div class="sm:col-4 md:col-4 lg:col-4">
+
+                    </div>
+                    <div class="sm:col-4 md:col-4 lg:col-4">
+                        <button pButton type="submit" (click)="filter()" label="Filter"
+                            class="ui-button-success"></button>
+
+                    </div>
+
+                </div>
+
+
+
+                <p-tree [value]="files1" [filter]="true" selectionMode="single" [(selection)]="selectedFile"
+                    (onNodeSelect)="nodeSelect($event)"></p-tree>
+
+            </div>
+            <div class="col-9">
+                <span style="margin-right: 20px;">
+                    <p-button label="Create Multi Staff Timesheet" (click)="MultiStaffshowDialog()" icon="pi pi-external-link"
+                        styleClass="p-button-danger"></p-button>
+                </span>
+                <span style="margin-right: 20px;">
+                    <p-button label="Get Today Report" (click)="GettodayTimesheet()" icon="pi pi-clock"
+                        styleClass="p-button-success"></p-button>
+                </span>
+                <span style="margin-right: 20px;">
+                    <p-button label="Refresh" (click)="ReloadData()" icon="pi pi-refresh" styleClass="p-button-dark">
+                    </p-button>
+                </span>
+
+                <div *ngIf="!todayTimesheet">
+                    <h2 style="text-align: center; font-size: 28px; color: #DC143C;">
+                        <i class="pi pi-exclamation-circle"></i> <br>
+                        <span>No data found</span>
+                    </h2>
+                </div>
+
+                <div class="grid">
+                    <div class="col-12 parent-container">
+                        <div class="container">
+
+                            <!-- <div class="grid" style="width: 100%; position: relative; overflow: scroll;"> -->
+                            <!-- <div class="p-col-12" style="width: 100%; position: relative; overflow: scroll;"> -->
+
+                            <!-- <hot-table *ngIf="todayTimesheet" [settings]="tableSettings" [data]="TimesheetDatas">
+                        </hot-table> -->
+
+                            <p-table [value]="TimesheetDatas" [scrollable]="true" [rows]="100" scrollHeight="250px"
+                                columnResizeMode="expand">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width:4rem">Staff Name</th>
+                                        <th style="width:4rem">Project</th>
+                                        <th style="width:6rem">Start Time</th>
+                                        <th style="width:6rem">End time</th>
+                                        <th style="width:6rem">End Date</th>
+                                        <th style="width:6rem">Description</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-timesheetData>
+                                    <tr>
+                                        <td style="width:4rem">{{timesheetData.timesheetDataStaff.fullName}}</td>
+                                        <td style="width:4rem">{{timesheetData.timesheetDataProject.projectName}}</td>
+                                        <td style="width:6rem">{{timesheetData.startTime}}</td>
+                                        <td style="width:6rem">{{timesheetData.endTime}}</td>
+                                        <td style="width:6rem">{{timesheetData.endDate}}</td>
+                                        <td style="width:6rem">{{timesheetData.description}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </p-panel>
+
+    <div>

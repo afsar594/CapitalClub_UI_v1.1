@@ -1,0 +1,33 @@
+#map {
+    height: 60vh;
+    width: 80vh;
+    margin: auto;
+  }
+   @media  (max-width: 700px) {
+
+   .dialog1{
+    width: 100%;
+   }
+}
+
+.ui-steps-item {
+    float:none !important;
+    }
+
+   .ui-button-icon-only .ui-icon.Fs23 {
+    font-size: 23px !important;
+    margin-left: -10px;
+}
+
+.ui-button-icon-only .ui-icon.fa.Fs23 {
+    margin-top: -12px !important;
+}
+.ui-dialog-resizable .ui-dialog-content, .ui-dialog .ui-dialog-content{
+    min-height: 70px !important;
+}
+
+.clock
+{
+    font-family: Lato;
+
+}

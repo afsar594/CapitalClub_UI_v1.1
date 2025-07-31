@@ -1,0 +1,240 @@
+<div class="layout-content">
+
+    <p-panel header="Dashboard" [style]="{minHeight: '360px'}">
+
+        <div class="grid">
+            <div class="col-12 md:col-6 lg:col-2">
+
+                <div class=" col text-center p-3 card overview-box overview-box-1 cardmenu">
+                    <div>
+                        <i class="fas fa-stopwatch" style="padding: 5px;font-size: 40px;"></i>
+                    </div>
+                    <div>
+                        <span class="overview-box-count">
+                            <h1><b><a routerLink="/user/timesheetsingle">TimeSheet</a></b>
+                            </h1><br>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-2">
+
+                <div class=" col border: 1px dashed #dddcol text-center p-3 card overview-box overview-box-1 cardmenu">
+                    <div>
+                        <i class="fas fa-file-signature" style="padding: 5px;font-size: 40px;"></i>
+                    </div>
+                    <div>
+                        <span class="overview-box-count">
+                            <h1><b><a routerLink="/user/leavedata">Leave Request</a></b></h1><br>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-2">
+
+                <div class="col text-center p-3 card overview-box overview-box-1 cardmenu">
+                    <div>
+                        <i class="fas fa-sticky-note" style="padding: 5px;font-size: 40px;"></i>
+                    </div>
+                    <div>
+                        <span class="overview-box-count">
+                            <h1><b><a routerLink="/user/leavebal">Leave Balance</a></b></h1><br>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class=" text-center p-3 card overview-box overview-box-1">
+                    <div class="grid">
+                        <div class="col-3 overview-box-icon">
+                            <i class="fas fa-calendar-alt" style="color: #2a5fa8;font-size: 80px; padding: 5px;"></i>
+                        </div>
+                        <div class="col-9">
+                            <span class="overview-box-count">
+                                <h1><b>Leave Request</b></h1>
+                            </span>
+                            <span class="overview-box-name">
+                                <h2>
+                                    <i class="fas fa-clipboard-check"
+                                        style="color: #0eba4a;font-size: 26px; padding: 5px;"></i> {{leavedataApproval}}
+                                    Approved
+                                </h2>
+                            </span>
+                            <span class="overview-box-name">
+                                <h2>
+                                    <i class="fas fa-clipboard"
+                                        style="color: #c10808;font-size: 26px; padding: 5px;"></i> {{leavedataPending}}
+                                    Pending
+
+                                </h2>
+                            </span>
+                            <!-- <span class="overview-box-rate">+10%</span> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="text-center p-3 card overview-box overview-box-1">
+                    <div class="grid">
+                        <div class="col-3 overview-box-icon">
+                            <i class="fas fa-envelope-open-text"
+                                style="color: #a82a45;font-size: 80px; padding: 5px;"></i>
+                        </div>
+                        <div class="col-9">
+                            <span class="overview-box-count">
+                                <h1><b>Service Request</b></h1>
+                            </span>
+                            <span class="overview-box-name">
+                                <h2>
+                                    <i class="fas fa-clipboard-check"
+                                        style="color: #0eba4a;font-size: 26px; padding: 5px;"></i>
+                                    {{servicedataApproval}} Approved
+                                </h2>
+                            </span>
+                            <span class="overview-box-name">
+                                <h2>
+                                    <i class="fas fa-clipboard"
+                                        style="color: #c10808;font-size: 26px; padding: 5px;"></i>
+                                    {{servicedataPending}} Pending
+
+                                </h2>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid" style="margin-top: -29px;" *ngIf="currentUserData.workgroupid==1">
+            <div class="col-12 md:col-6 lg:col-2">
+
+                <div class=" col text-center p-3 card overview-box overview-box-1 cardmenu">
+                    <div>
+                        <i class="fas fa-pencil" style="padding: 5px;font-size: 40px;"></i>
+                    </div>
+                    <div>
+                        <span class="overview-box-count">
+                            <h1><b><a routerLink="/user/userlist">User List</a></b>
+                            </h1><br>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-12 md:col-4 lg:col-4">
+                <div class="p-card p-1 shadow-2 border-round-xl w-full sm:w-30rem">
+                    <div
+                        class="flex align-items-center justify-content-between mb-4 bg-green-500 p-2 border-round-top-xl">
+                        <div class="flex align-items-center gap-3 text-white">
+                            <!-- <img src="assets/layout/images/avatar4.png" alt="Profile" -->
+                             <img alt="User" [src]="usrImg"
+                                class="w-3rem h-3rem border-circle shadow-1" />
+                            <div>
+                                <div class="text-lg font-bold">{{userstaffName}}</div>
+                                <div class="text-sm">{{userDesignation}} &bull; AZHHC</div>
+                            </div>
+                        </div>
+                        <i class="pi pi-pencil text-white cursor-pointer"></i>
+                    </div>
+
+                    <div class="p-2">
+                        <div class="mb-2">
+                            <div class="text-sm text-500">Phone Number</div>
+                            <div class="font-medium">+971 56 835 8561</div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="text-sm text-500">Email Address</div>
+                            <div class="font-medium">mark&#64;sunnymanagementgroup.com</div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="text-sm text-500">Report Office</div>
+                            <div class="font-medium">Al Zeyarat Home Health Care - Sharjah</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-500">Joined on</div>
+                            <div class="font-medium">13 Mar 2021</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 md:col-4 lg:col-4 task-list">
+                <div class="p-card p-1 shadow-2 border-round-xl w-full sm:w-30rem">
+                    <p-panel header="MEMOS" [style]="{minHeight: '274px'}">
+                        <!-- <hot-table  hotId="table-instance1"
+                        [settings]="tableSettings"
+                        [data]="MemoData">
+                    </hot-table> -->
+                        <div class="p-grid">
+                            <div class="p-col-12">
+
+                                <p-table [value]="MemoData" [scrollable]="true" [rows]="100" scrollHeight="250px"
+                                    columnResizeMode="expand">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th style="width:4rem">Memo_ID</th>
+                                            <th style="width:8rem">Date</th>
+                                            <th style="width:8rem">Reply</th>
+                                            <th style="width:8rem">Remarks</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-memodata>
+                                        <tr>
+                                            <td style="width:4rem">{{memodata.memoId}}</td>
+                                            <td style="width:8rem">{{memodata.memoDate}}</td>
+                                            <td style="width:8rem">{{memodata.reply}}</td>
+                                            <td style="width:8rem">{{memodata.remarks}}</td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+
+
+                    </p-panel>
+                </div>
+            </div>
+
+            <div class="col-12 md:col-4 lg:col-4 task-list">
+                <div class="p-card p-1 shadow-2 border-round-xl w-full sm:w-30rem">
+                    <p-panel header="Pending Request's" [style]="{minHeight: '274px'}">
+                        <!-- <hot-table  hotId="table-instance"
+                        [settings]="tableSettings1"
+                        [data]="PendingREquest">
+                    </hot-table> -->
+
+                        <div class="p-grid">
+                            <div class="p-col-12">
+
+                                <p-table [value]="PendingREquest" [scrollable]="true" [rows]="100" scrollHeight="250px"
+                                    columnResizeMode="expand">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th style="width:4rem">Code</th>
+                                            <th style="width:8rem">Leave_Type</th>
+                                            <th style="width:8rem">From_Date</th>
+                                            <th style="width:8rem">End_Date</th>
+                                            <th style="width:6rem">Total_Days</th>
+                                            <th style="width:8rem">Reason</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-leavedata>
+                                        <tr>
+                                            <td style="width:4rem">{{leavedata.leavDataId}}</td>
+                                            <td style="width:8rem">{{leavedata.leaveDataTypeNavigation.leaveType}}</td>
+                                            <td style="width:8rem">{{leavedata.leaveDataFrom}}</td>
+                                            <td style="width:8rem">{{leavedata.leaveDataTo}}</td>
+                                            <td style="width:6rem">{{leavedata.leaveDays}}</td>
+                                            <td style="width:8rem">{{leavedata.leaveDataReason}}</td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </p-panel>
+                </div>
+            </div>
+        </div>
+    </p-panel>
+</div>
