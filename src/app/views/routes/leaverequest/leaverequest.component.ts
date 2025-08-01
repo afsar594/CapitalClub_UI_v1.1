@@ -43,6 +43,7 @@ export class LeaverequestComponent implements OnInit {
   empdata: ViewStaffModel;
   balancedLeave: number = 0;
   isload: boolean=true;
+  totalholidays: any=0;
 
   constructor(private serviceReqService: ServiceReqService,
     private fb: FormBuilder, private messageService: MessageService,
@@ -300,6 +301,13 @@ UpdateDate(leavdata: any) {
     this.leaveform.get('enddate')?.setValue(null);
     return false;
   }
+   let fromDate = this.leaveform.get('fromdate')?.value;
+let toDate = this.leaveform.get('enddate')?.value;
+
+if (fromDate && toDate) {
+  this.getholidaysbyDate(fromDate,toDate)
+}
+
 
   const today = new Date();
   const startDate = new Date(this.bindingFromDate);
@@ -446,22 +454,21 @@ UpdateDate(leavdata: any) {
     
 getLeaveTypesById()
 {
-      console.log("current User",this.currentUserData.id)
     this.leaveTypeAService.getLeaveTypeById(Number(this.currentUserData.id)).subscribe((res:any) => {
-          console.log("current User Res",res)
-
       this.leaveTypes = res.data;
     })
 }
  GetLeaveType(){
   this.leaveTypeAService.GetLeaveType().subscribe(res =>{
-    console.log("leave type",res)
           this.leaveTypes = res;
-
-
   })
  }
 
+  getholidaysbyDate( fromDate,ToDate){
+  this.leaveTypeAService.getholidaysbyDate(fromDate.toISOString().slice(0, 10),ToDate.toISOString().slice(0, 10)).subscribe(res =>{
+this.totalholidays=res
+  })
+ }
 
   get diagnostic() { return JSON.stringify(this.leaveform.value); }
 

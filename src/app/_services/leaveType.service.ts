@@ -59,5 +59,12 @@ GetAllUsers() {
     getLeaveBalances(empid: number,workgroupId:number) {
         return this.http.get<ApiResponse<any[]>>(this.apiUrl + 'leave/getallLeaveBalanace/'+ empid+"/"+workgroupId);
       }
+
+   getholidaysbyDate(fromdate:string, enddate:string){
+           
+              return this.http.get<Array<any>>( this.apiUrl+"leave/getalllHolidaysbyDate/"+fromdate+"/"+enddate).pipe(map(leavedatas=>{
+                  return leavedatas
+              }))
+          }
       
 }
