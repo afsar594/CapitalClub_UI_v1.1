@@ -49,7 +49,6 @@ export class LeaverequestComponent implements OnInit {
     private fb: FormBuilder, private messageService: MessageService,
     private leaveTypeAService: LeaveTypeService,
     private LeaveDataService: LeaveDataService,
-
     private router: Router,
     private AuthService: AuthenticationService) { }
 
@@ -64,13 +63,8 @@ export class LeaverequestComponent implements OnInit {
 
     });
     this.TodayDate = new Date();
-
-
-
-
     this.currentUserData = this.AuthService.currentUserValue;
     console.log("current user",this.currentUserData)
-
     this.serviceReqService.ReadStaffDatas(this.currentUserData.id).subscribe(res => {
       this.empdata = res;
     }
@@ -174,15 +168,6 @@ export class LeaverequestComponent implements OnInit {
       }
     }
   }
-  
-  
-
-
-
-
-
-  
-
 
 
   // UpdateDate(leavdata: any) {
