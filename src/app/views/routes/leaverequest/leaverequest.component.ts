@@ -304,8 +304,8 @@ UpdateDate(leavdata: any) {
   }
    let fromDate = this.leaveform.get('fromdate')?.value;
 let toDate = this.leaveform.get('enddate')?.value;
-
-if (fromDate && toDate) {
+let leavetype = this.leaveform.get('leavetype')?.value;
+if (fromDate && toDate && leavetype.leaveType=='Annual Leave') {
   this.getholidaysbyDate(fromDate,toDate)
 }
 
