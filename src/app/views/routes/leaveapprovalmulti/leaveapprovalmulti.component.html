@@ -1,0 +1,122 @@
+<!-- <app-page-header [nav]='[{label: "leaveReqform"},{label: "Leave Request"}]'
+    [title]='title'></app-page-header> -->
+<div class="layout-content">
+    <p-toolbar>
+        <div class="p-toolbar-group-start">
+            <p-button [label]="btnFlag.save == true ? 'Approve': 'Approve'" (click)="approveLeave()"
+                icon="fa fa-floppy-o" class="mr-2" styleClass="p-button-success"></p-button>
+            <p-button label="Reject1" class="mr-2" (click)="Rejectform()" icon="pi pi-external-link"
+                styleClass="p-button-danger">
+            </p-button>
+            <p-button label="Exit" (click)="ExitNew()" icon="fa fa-sign-out" styleClass="p-button-inspire"></p-button>
+        </div>
+    </p-toolbar>
+
+    <p-card [formGroup]='leaveform'>
+
+        <p-panel header="Leave Multi Request">
+            <div style="width: 100vw;">
+                <div class="grid  mt-4">
+                    <div class="p-col-8">
+                        <div class="grid">
+                            <div class="lg:col-6 sm:col-12 md:col-6">
+                                <div class="flex flex-column gap-2">
+                                    <label>Leave Type</label>
+                                    <p-dropdown placeholder="-----Select Type-----" [options]="leaveTypes"
+                                        formControlName="leavetype"  optionLabel="leaveType" [showClear]="true"
+                                        [style]="{'width': '100%'}" />
+                                    <p-message severity="error" text="Required"
+                                        *ngIf="!leaveform.controls['leavetype'].valid&&leaveform.controls['leavetype'].dirty"></p-message>
+                                </div>
+                            </div>
+                            <div class="lg:col-6 sm:col-12 md:col-6">
+                                <div class="flex flex-column gap-2">
+                                    <label for="username"> Request Date</label>
+    
+                                    <input id="lastname3" type="text" pInputText value="{{TodayDate | date:'dd/M/yy'}}"
+                                        readonly />
+                                </div>
+                            </div>
+    
+                        </div>
+                        <div class="grid">
+                            <div class="lg:col-6 sm:col-12 md:col-6">
+                                <div class="flex flex-column gap-2">
+                                    <label for="username"> From Date</label>
+                                    <p-calendar useUtc formControlName="fromdate" [showButtonBar]="true" [appendTo]="'body'"
+                                        [(ngModel)]="bindingFromDate" [style]="{'width': '100%'}"
+                                        (onSelect)="UpdateDate(leaveform.value)" dateFormat="dd/M/yy" readonly />
+                                    <p-message severity="error" text="Required"
+                                        *ngIf="!leaveform.controls['fromdate'].valid&&leaveform.controls['fromdate'].dirty"></p-message>
+                                </div>
+                            </div>
+                            <div class="lg:col-6 sm:col-12 md:col-6">
+                                <div class="flex flex-column gap-2">
+                                    <label for="username"> End Date</label>
+                                    <p-calendar useUtc [appendTo]="'body'" [showButtonBar]="true" formControlName="enddate"
+                                        [(ngModel)]="bindingEndDate" dateFormat="dd/M/yy" readonly
+                                        [style]="{'width': '100%'}" (onSelect)="UpdateDate(leaveform.value)" />
+                                    <p-message severity="error" text="Required"
+                                        *ngIf="!leaveform.controls['enddate'].valid&&leaveform.controls['enddate'].dirty"></p-message>
+    
+                                </div>
+                            </div>
+                        </div>
+                                 <div class="p-grid">
+                            <div class="p-field p-col-6">
+                                <div class="flex flex-column gap-2">
+                                    <label for="lastname3" class="p-col-fixed" style="width:110px">Reason<span
+                                            class="mand_star"></span></label>
+    
+                                    <textarea rows="3" cols="50" formControlName="reason" pInputTextarea
+                                        autoResize="autoResize"></textarea>
+                                </div>
+    
+    
+                            </div>
+                        </div>
+    
+                        <div class="lg:col-6 sm:col-12 md:col-6" style="display: flex;padding: 25px 0;">
+    
+                                <button pButton type="button" label="DAYS" class="p-button-warning">
+                                    <h1>{{totalDays}}</h1>
+                                </button>
+                                <button pButton type="button" label="Balance" style="margin-left: 33px;" class="p-button-warning">
+                                    <h1>{{balancedLeave}}</h1>
+                                </button>
+                            </div>
+
+
+                        <div class="p-grid">
+                            <div class="p-field p-col-6">
+                                <div class="flex flex-column gap-2">
+                                    <label for="lastname3" class="p-col-fixed" style="width:110px">Remarks<span
+                                            class="mand_star"></span></label>
+    
+                                    <textarea rows="3" cols="50" formControlName="remarks" pInputTextarea
+                                        autoResize="autoResize"></textarea>
+                                                                           <p-message
+                                                                severity="error"
+                                                                text="Required"
+                                                                *ngIf="leaveform.controls['remarks'].invalid && leaveform.controls['remarks'].touched"
+                                                                ></p-message>
+                                </div>
+    
+    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-4">
+                        <div class="p-grid">
+                            <p-image [src]="leaveform.controls.imageFile.value"
+                                [previewImageSrc]="leaveform.controls.imageFile.value" alt="Image" width="250"
+                                [preview]="true" />
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </p-panel>
+    </p-card>
+</div>

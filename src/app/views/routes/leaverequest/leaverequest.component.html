@@ -2,8 +2,9 @@
     [title]='title'></app-page-header> -->
     <p-toolbar>
         <div class="p-toolbar-group-start">
-            <p-button type="button" [label]="btnFlag.save == true ? 'Save': 'Update'" (click)="onSubmit(leaveform.value)"
-                icon="fa fa-floppy-o" [style]="{ 'background-color': '#28a745', 'border-color': '#28a745' }" class="mr-2" />
+               <button [disabled]="submitted"  pButton type="button" [label]="btnFlag.save == true ? 'Save': 'Update'" class=" p-button-info mr-2"
+                     icon="fa fa-floppy-o"       (click)="onSubmit(leaveform.value)"></button>
+
             <p-button type="button" label="Exit" (click)='ExitNew()' icon="fa fa-sign-out" class="mr-2"
                 [style]="{ 'background-color': '#ec3a2d', 'border-color': '#ec3a2d' }" />
         </div>

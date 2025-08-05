@@ -53,8 +53,8 @@ import { ToastModule } from 'primeng/toast';
 import { HistoryReportComponent } from './history-report/history-report.component';
 import { LoginnewComponent } from './loginnew/loginnew.component';
 import { UserListComponent } from './user-list/user-list.component';
-
-
+import { LeaveapproveMultiComponent } from './leaveapprovemulti/leaveapprovemulti.component';
+import { LeaveapprovalMultiComponent } from './leaveapprovalmulti/leaveapprovalmulti.component';
 const moduleRoutes1: Routes = [
   {
     path: '', component: RouteIndexComponent,
@@ -77,8 +77,9 @@ const moduleRoutes1: Routes = [
       { path: 'attendance', component: AttendanceComponent, pathMatch: 'full' },
       { path: 'test', component: OpeningBalanceEntryComponent, pathMatch: 'full' },
       { path: 'historyreport', component: HistoryReportComponent, pathMatch: 'full' },
-        { path: 'loginnew', component: LoginnewComponent, pathMatch: 'full' }
-
+      { path: 'loginnew', component: LoginnewComponent, pathMatch: 'full' },
+      { path: 'leaveapprovemulti', component: LeaveapproveMultiComponent, pathMatch: 'full' },
+      { path: 'leaveapprovalmulti', component: LeaveapprovalMultiComponent, pathMatch: 'full' },
     ]
   }
 ]
@@ -93,7 +94,8 @@ const moduleRoutes1: Routes = [
     TimeSheetComponent, TimesheetSingleComponent, TimesheetSinglestaffComponent,
     LeaveapproveComponent, ServiceapproveComponent, LeaverequestComponent,
     LeaveapprovalComponent, ServiceapprovalComponent, LeavebalComponent,
-    PasswordComponent, LeavesapprovedComponent,HistoryReportComponent,LoginnewComponent],
+    PasswordComponent, LeavesapprovedComponent,HistoryReportComponent,LoginnewComponent,
+    LeaveapproveMultiComponent,LeaveapprovalMultiComponent],
   providers: [
     MessageService,
     // {

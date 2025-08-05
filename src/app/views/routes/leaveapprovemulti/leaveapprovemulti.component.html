@@ -1,0 +1,127 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<div class="layout-content">
+    <p-panel header="Leave Details  [ {{title}} ]">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="tbSearchStaffName">
+                        Staff Name multi
+                    </label>
+                    <p-dropdown [options]="staffList" placeholder="Select Staff" [(ngModel)]="empName"
+                        [style]="{'width': '100%'}" [showClear]="true" [filter]="true"></p-dropdown>
+                    <!-- <input type="text" id="tbSearchStaffName" pInputText [(ngModel)]="empName" /> -->
+                </div>
+            </div>
+            <div class="col-12 md:col-3">
+                <div class="flex flex-column gap-2">
+                    <label>
+                        Select Date From
+                    </label>
+                    <p-calendar [showIcon]="true" [(ngModel)]='fromdate' dateFormat="dd-M-yy" readonly required>
+                    </p-calendar>
+                </div>
+            </div>
+            <div class="col-12 md:col-3">
+                <div class="flex flex-column gap-2">
+                    <label>
+                        End Date
+                    </label>
+                    <p-calendar [showIcon]="true" [(ngModel)]='enddate' dateFormat="dd-M-yy" readonly required>
+                    </p-calendar>
+                </div>
+            </div>
+            <div class="col-12 md:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="currency-japan">
+                        Select Company
+                    </label>
+                    <p-dropdown [options]="companies" placeholder="Select Company" [(ngModel)]="filtercompany"
+                        [showClear]="true"></p-dropdown>
+                </div>
+            </div>
+
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-2">
+                <div class="flex flex-column gap-2">
+                    <label class="mb-2" for="currency-japan">
+                    </label>
+                    <button pButton type="submit" (click)="filterData()" label="Filter"
+                        class="p-button-success vertical-align-bottom"></button>
+
+                </div>
+            </div>
+            <div class="col-12 md:col-2">
+                <div class="flex flex-column gap-2">
+                    <label class="mb-2" for="currency-japan">
+
+                    </label>
+                    <p-splitButton label="Refresh" icon="pi pi-refresh" (onClick)="ReloadData()" [model]="items"
+                        class="p-button-secondary"></p-splitButton>
+                </div>
+            </div>
+            <div class="col-12 md:col-2">
+                <div class="flex flex-column gap-2">
+                    <label class="mb-2" for="currency-japan">
+
+                    </label>
+                                   <p-button 
+                    (click)="toggleSort()" 
+                    class="toggle" 
+                    label="{{ sortOrder === 'asc' ? 'Sort ↓ Descending' : 'Sort ↑ Ascending' }}">
+                    </p-button>
+                </div>
+            </div>
+
+        </div>
+
+    </p-panel>
+         <p-panel header="Details">
+            <p-table [value]="sortedData" [scrollable]="true" [rows]="100" scrollHeight="450px"
+                columnResizeMode="expand">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:4rem">Code</th>
+                        <th Style="width:8rem">Staff Name</th>
+                        <th style="width:8rem">Company Name</th>
+                        <th style="width:8rem">Leave Type</th>
+                        <th style="width:8rem">From Date</th>
+                        <th style="width:8rem">End Date</th>
+                        <th style="width:6rem">Total Days</th>
+                        <th style="width:8rem">Reason</th>
+                        <th style="width:8rem">Request Date</th>
+                        <th style="width:8rem">Status</th>
+                        <th style="width:8rem">Action</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-leavedata>
+                    <tr>
+                        <td style="width:4rem">{{leavedata.leavDataId}}</td>
+                        <td style="width:8rem">{{leavedata.leaveEmpName}}</td>
+                        <td style="width:8rem">{{leavedata.companyName}}</td>
+                        <td style="width:8rem">{{leavedata.leaveDataTypeNavigation.leaveType}}</td>
+                        <td style="width:8rem">{{leavedata.leaveDataFrom}}</td>
+                        <td style="width:8rem">{{leavedata.leaveDataTo}}</td>
+                        <td style="width:6rem">{{leavedata.leaveDays}}</td>
+                        <td style="width:8rem">{{leavedata.leaveDataReason}}</td>
+                        <td style="width:8rem">{{leavedata.reqDate | date:"dd/MMM/yyyy"}}</td>
+                        <td style="width:8rem">
+                            <p-tag
+                                [value]="leavedata.status === 0 ? leavedata.remaining + ' Pending' : leavedata.status === 2 ? 'Approved ' + '\('+ leavedata.remaining + ' remaining)' : ''"
+                                [severity]="getSeverity(leavedata.status)">
+                            </p-tag>
+                        </td>
+
+                        <td style="width:8rem">
+                            <!-- <button pButton type="button" label="Approve" class="p-button-rounded p-button-danger" (click)='updateleave(leavedata.leavDataId)'></button> -->
+                            <button [disabled]="leavedata.status === 0 ? false:true"  pButton type="button" label="Approve" class="p-button-rounded p-button-danger"
+                                (click)='Aproveforward(leavedata.leavDataId)'></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-panel>
+     <!-- </div> -->
+</div>

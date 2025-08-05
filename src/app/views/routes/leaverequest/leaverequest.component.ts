@@ -90,6 +90,7 @@ export class LeaverequestComponent implements OnInit {
     }
   }
 
+  
   onSubmit(leavdata: NewLeaveDataModel) {
     this.leaveform.markAllAsTouched()
     leavdata.TotalDays = this.totalDays;
@@ -103,20 +104,20 @@ export class LeaverequestComponent implements OnInit {
       return false;
     }
     leavdata.EmployeeID = this.currentUserData.id;
-
+    this.submitted = true;
     this.LeaveDataService.SendNewLeaveRequest(leavdata).subscribe(res => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfull Added' });
-
+    this.submitted = false;
       this.valueChange.emit();
       this.leaveform.reset();
 
     },
       err => {
         this.messageService.add({ severity: 'error', summary: 'Cant Process Now', detail: 'network Error' });
-
+      this.submitted = false;
       }
     )
-    this.submitted = true;
+
   }
 
   ExitNew() {
