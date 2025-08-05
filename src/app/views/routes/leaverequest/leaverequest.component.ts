@@ -136,6 +136,7 @@ export class LeaverequestComponent implements OnInit {
       // Reset from/to dates
   this.bindingFromDate = null;
   this.bindingEndDate = null;
+    this.totalholidays=0
 
   this.leaveform.get('fromdate')?.setValue(null);
   this.leaveform.get('enddate')?.setValue(null);
