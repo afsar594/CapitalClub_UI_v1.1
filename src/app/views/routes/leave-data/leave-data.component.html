@@ -106,13 +106,14 @@
                                 <td style="width:8rem">{{leavedata.reqDate | date:"dd/MMM/yyyy"}}</td>
                                 <td style="width:8rem">
                                     <ng-container *ngIf="leavedata.status === 0">
-                                        Pending
+                                      {{leavedata.remaining +  ' Pending'}}
                                     </ng-container>
                                     <ng-container *ngIf="leavedata.status === 1">
                                         Processed
                                     </ng-container>
                                     <ng-container *ngIf="leavedata.status === 2">
                                         Approved
+                                        <!-- {{'Approved ' + '\('+ leavedata.remaining + ' remaining)'}} -->
                                     </ng-container>
                                     <ng-container *ngIf="leavedata.status === 3">
                                         Rejected
@@ -123,11 +124,11 @@
                                 <td style="width:8rem">
                                     <ng-container *ngIf="leavedata.status === 0">
                                         <p-button label="Delete" (click)='deleteleave(leavedata.leavDataId)'
-                                            styleClass="ui-button-danger"></p-button>
+                                            styleClass="p-button-danger"></p-button>
                                     </ng-container>
                                     <ng-container *ngIf="leavedata.status === 1">
                                         <p-button label="Delete" (click)='deleteleave(leavedata.leavDataId)'
-                                            styleClass="ui-button-danger"></p-button>
+                                            styleClass="p-button-danger"></p-button>
                                     </ng-container>
 
 

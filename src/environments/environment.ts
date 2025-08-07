@@ -8,7 +8,5 @@ export const environment = {
     // apiUrl: 'http://103.74.54.207:8098/apis/v1/',
     //  apiUrl: ' http://103.74.54.207:8285/api/v1/'
       // apiUrl: 'http://103.74.54.207:8103/api/v1/'
-     
-
 };
 
