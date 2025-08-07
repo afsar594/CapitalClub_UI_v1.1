@@ -117,6 +117,9 @@ export class LeaveDataService {
     GetallStaff() {
         return this.http.get<any>(this.apiUrl + 'leave/getallstaff');
     }
+      Getalldepartments() {
+        return this.http.get<any>(this.apiUrl + 'leave/getalldepartment');
+    }
 
        GetallStaffBYworkgroupId(empid: number,WorkgroupId:number) {
         return this.http.get<Array<any>>(this.apiUrl + "leave/GetstaffByAdminId/" + empid+"/"+WorkgroupId).pipe(map(leaveBaldata => {
