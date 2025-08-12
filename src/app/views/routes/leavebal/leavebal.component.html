@@ -27,6 +27,39 @@
 
  <div class="layout-content">
 <p-toolbar>
+    <div class="col-12 md:col-3">
+                <div class="flex flex-column gap-2">
+                    <label for="tbSearchStaffName">
+                        Department
+                    </label>
+                    <p-dropdown [options]="delpartmentArray" placeholder="Select department" [(ngModel)]="delpartmentID"
+                        [style]="{'width': '100%'}" [showClear]="true" [filter]="true"></p-dropdown>
+                </div>
+            </div>
+
+
+   <div class="col-12 md:col-2">
+                <div class="flex flex-column gap-2">
+                    <label class="mb-2" for="currency-japan">
+                    </label>
+                    <button pButton type="submit" (click)="filterData()" label="Filter"
+                        class="p-button-success vertical-align-bottom"></button>
+
+                </div>
+            </div>
+
+
+
+              <div class="col-12 md:col-2">
+                <div class="flex flex-column gap-2">
+                    <label class="mb-2" for="currency-japan">
+                    </label>
+                    <button pButton type="submit" (click)="clear()" label="Clear"
+                        class="p-button-danger vertical-align-bottom"></button>
+
+                </div>
+            </div>
+
   <div class="p-toolbar-group-end">
     <p-button label="Excel" icon="pi pi-file-excel" (click)="exportToExcel()"
       [style]="{ 'background-color': '#28a745', 'border-color': '#28a745' }"/>
@@ -43,6 +76,7 @@
                 <th>Staff Code</th>
                 <th>Name</th>
                 <th>Leave Type</th>
+                <th>Department</th>
                 <th>Company</th>
                 <th>Date of Join</th>
                 <th>Balance</th>
@@ -55,6 +89,7 @@
                 <!-- <td>{{ item?.staffId }}</td> -->
                 <td>{{ item?.fullName }}</td>
                 <td>{{ item?.leaveType }}</td>
+                <td>{{ item?.departmentName }}</td>
                 <td>{{ item?.companyName }}</td>
                 <td>{{ item?.joiningDate | date }}</td>
                 <td>{{ item?.totalLeaveBalance }}</td>
