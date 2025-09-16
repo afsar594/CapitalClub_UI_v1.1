@@ -325,7 +325,6 @@ sortItems(): void {
   }
     GetallStaffBYworkgroupId(id,workgroupid){
     this.LeavdataService.GetallStaffBYworkgroupId(id,workgroupid).subscribe(res=>{
-      console.log("get staff by Id",res)
       if (res && res.length > 0) {
         this.staffList = res.map((data) => ({
           label: data?.staff.fullName,

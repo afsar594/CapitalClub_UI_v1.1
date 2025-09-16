@@ -121,16 +121,26 @@
 
                                 </td>
 
-                                <td style="width:8rem">
-                                    <ng-container *ngIf="leavedata.status === 0">
-                                        <p-button label="Delete" (click)='deleteleave(leavedata.leavDataId)'
-                                            styleClass="p-button-danger"></p-button>
-                                    </ng-container>
-                                    <ng-container *ngIf="leavedata.status === 1">
-                                        <p-button label="Delete" (click)='deleteleave(leavedata.leavDataId)'
-                                            styleClass="p-button-danger"></p-button>
-                                    </ng-container>
-                                </td>
+                               <td style="width:8rem">
+  <!-- Show Delete enabled if remaining === 3 -->
+    <ng-container *ngIf="leavedata.remaining == 3">
+  <p-button 
+    label="Delete" 
+    (click)="deleteleave(leavedata.leavDataId)" 
+    styleClass="p-button-danger" 
+    [disabled]="leavedata.remaining !== 3">
+  </p-button>
+</ng-container>
+  <!-- Show Approved disabled if remaining !== 3 -->
+  <ng-container *ngIf="leavedata.remaining !== 3">
+    <p-button 
+      label="Approved" 
+      [disabled]="true" 
+      styleClass="p-button-success">
+    </p-button>
+  </ng-container>
+</td>
+
                             </tr>
                         </ng-template>
                     </p-table>
