@@ -128,48 +128,45 @@ export class LeaverequestComponent implements OnInit {
     this.totalDays=0
   }
 
-  onLeaveChange(event) {
-    this.LeaveDataService.ReadLeaveBalTypeDatas(this.currentUserData.id, event.value.leaveTypeId).subscribe(res => {
-      this.balLeave = res[0]?.leaveBalNo;
-      this.balancedLeave = res[0]?.leaveBalNo;
-    }); 
-      // Reset from/to dates
+ onLeaveChange(event) {
+
   this.bindingFromDate = null;
   this.bindingEndDate = null;
-    this.totalholidays=0
+  this.totalholidays = 0;
 
   this.leaveform.get('fromdate')?.setValue(null);
   this.leaveform.get('enddate')?.setValue(null);
 
-  // Reset calculations
   this.totalDays = 0;
   this.leaveAccrued = 0;
-    const today = new Date();
-    const startDate = new Date(this.bindingFromDate);
-    const endDate = this.bindingEndDate ? new Date(this.bindingEndDate) : null;
-  
-    const diffFromToday = startDate.getTime() - today.getTime();
-    this.totalDays = Math.ceil(diffFromToday / (1000 * 3600 * 24)) + 1;
-    this.leaveAccrued = Math.round((this.totalDays / 30) * 2.5);
-    this.balLeave = this.balancedLeave + this.leaveAccrued;
-  
-    if (endDate) {
-      const diffBetweenDates = endDate.getTime() - startDate.getTime();
-      this.totalDays = Math.ceil(diffBetweenDates / (1000 * 3600 * 24)) + 1;
-    }
-    if (this.totalDOJDays <= 90) {
-      if (event.value.leaveType === 'Sick Leave' || event.value.leaveType === 'Annual Leave') {
-        if (!this.isload) {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Cannot Apply!',
-            detail: 'Date of joining must be greater than 90 days'
-          });
-        }
-        this.totalDays = 0; 
+
+  if (event.value.leaveType === 'Annual Leave') {
+    this.LeaveDataService.ReadLeaveBalTypeDatas(
+      this.currentUserData.id,
+      event.value.leaveTypeId
+    ).subscribe(res => {
+      this.balLeave = res[0]?.leaveBalNo ?? 0;
+      this.balancedLeave = res[0]?.leaveBalNo ?? 0;
+    });
+  } else {
+    this.balLeave = 0;
+    this.balancedLeave = 0;
+  }
+
+  if (this.totalDOJDays <= 90) {
+    if (event.value.leaveType === 'Sick Leave' || event.value.leaveType === 'Annual Leave') {
+      if (!this.isload) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Cannot Apply!',
+          detail: 'Date of joining must be greater than 90 days'
+        });
       }
+      this.totalDays = 0;
     }
   }
+}
+
 
 
   // UpdateDate(leavdata: any) {

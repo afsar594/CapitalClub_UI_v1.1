@@ -29,26 +29,7 @@
           "/user/leavedata"
         ]
       },
-      {
-        "label": "Leave Approval",
-        "icon": "fa fa-fw fa-calendar-week",
-        "privilages": [
-          1
-        ],
-        "routerLink": [
-          "/user/leaveapprove"
-        ]
-      },
-      {
-        "label": "Leave Approved",
-        "icon": "fa fa-fw fa-calendar-week",
-        "privilages": [
-          1
-        ],
-        "routerLink": [
-          "/user/leaveapproved"
-        ]
-      },
+      
           {
         "label": "Multi Leave Approval",
         "icon": "fa fa-fw fa-calendar-week",
@@ -155,3 +136,6 @@
     ]
   }
 ]
+
+
+
