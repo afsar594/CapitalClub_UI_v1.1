@@ -9,11 +9,11 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-leaveapprove',
-  templateUrl: './leaveapprove.component.html',
-  styleUrls: ['./leaveapprove.component.scss']
+  selector: 'app-leaveapprovemulti',
+  templateUrl: './leaveapprovemulti.component.html',
+  styleUrls: ['./leaveapprovemulti.component.scss']
 })
-export class LeaveapproveComponent implements OnInit {
+export class LeaveapproveMultiComponent implements OnInit {
   display: boolean = false;
   items: MenuItem[];
   title: string;
@@ -155,7 +155,7 @@ export class LeaveapproveComponent implements OnInit {
     this.filterData();
     this.GetallStaff()
     this.sortItems();
-   //this.GetallStaffBYworkgroupId( this.currentUserData.id,this.currentUserData.workgroupid)
+
   }
 
 toggleSort(): void {
@@ -190,7 +190,7 @@ sortItems(): void {
 
 
   Aproveforward(leavDataId: number) {
-    this.navCtrl.navigateByUrl(`/user/leaveapproval?leaveId=${leavDataId}`)
+    this.navCtrl.navigateByUrl(`/user/leaveapprovalmulti?leaveId=${leavDataId}`)
     // this.navCtrl.navigate(['/user/leaveapprovad'], {
     //   queryParams: {
     //     leaveId: leavDataId
@@ -290,6 +290,7 @@ sortItems(): void {
     }
 
     var companyId = 0;
+       
     // alert(JSON.stringify(this.filtercompany));
 
     if (this.filtercompany == null || this.filtercompany == undefined) {
@@ -300,7 +301,7 @@ sortItems(): void {
       companyId = this.filtercompany;
     }
 
-    this.LeavdataService.FilterPendingLeavesDatas(empNameStr, fromDateStr, endDateStr, companyId).subscribe(res => {
+    this.LeavdataService.FilterPendingMultiLeavesDatas(empNameStr, fromDateStr, endDateStr, companyId,this.currentUserData.id).subscribe(res => {
 
       this.LeaveDatas = res;
        this.sortedData = [...this.LeaveDatas];
@@ -316,19 +317,6 @@ sortItems(): void {
         this.staffList = res.map((data) => ({
           label: data?.fullName,
           value: data?.staffId
-        }))
-  
-        this.staffList.unshift({ label: '--Select--', value: -1 });
-      }
-  
-    })
-  }
-    GetallStaffBYworkgroupId(id,workgroupid){
-    this.LeavdataService.GetallStaffBYworkgroupId(id,workgroupid).subscribe(res=>{
-      if (res && res.length > 0) {
-        this.staffList = res.map((data) => ({
-          label: data?.staff.fullName,
-          value: data?.staff.staffId
         }))
   
         this.staffList.unshift({ label: '--Select--', value: -1 });

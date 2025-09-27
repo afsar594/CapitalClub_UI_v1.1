@@ -14,14 +14,16 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./leavebal.component.scss']
 })
 export class LeavebalComponent implements OnInit {
-
+delpartmentID:any
   leaveBalances: any[]=[];
   currentUserData: User;
+  delpartmentArray: any;
      constructor( 
       private activatedroute:ActivatedRoute,
       private leavetype:LeaveTypeService,
       private authService: AuthenticationService,
       private messageService: MessageService,
+      private LeavdataService: LeaveDataService,
       ) { }
 
 
@@ -29,15 +31,15 @@ export class LeavebalComponent implements OnInit {
     ngOnInit(): void {
     
       this.currentUserData = this.authService.currentUserValue;
-      this.fetchLeaveBalances();
+      this.getAllDepartments()
+     // this.fetchLeaveBalances();
+     this.filterData()
     }
-
-
     fetchLeaveBalances(): void {
-      this.leavetype.getLeaveBalances(this.currentUserData.id,this.currentUserData.workgroupid).subscribe(
+      this.leavetype.getLeaveBalances(this.currentUserData.id,this.currentUserData.workgroupid,-1).subscribe(
         (data: any) => {
           this.leaveBalances = data;
-        },
+           this.delpartmentID = null;        },
         (error) => {
           this.messageService.add({
             severity: 'error',
@@ -124,5 +126,51 @@ export class LeavebalComponent implements OnInit {
       saveAs(blob, `${fileName}.xlsx`);
     }
     
+
+     filterData() {
+
+   
+    var departmentId = null;
+ 
+
+    if (this.delpartmentID == null || this.delpartmentID == undefined) {
+      departmentId = -1;
+
+    }
+    else {
+      departmentId = this.delpartmentID;
+    }
+
+     this.leavetype.getLeaveBalances(this.currentUserData.id,this.currentUserData.workgroupid,departmentId).subscribe(
+        (data: any) => {
+          this.leaveBalances = data;
+        },
+        (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Alert',
+            detail: 'Error fetching leave balances',
+          });
+        }
+      );
+  };
+  getAllDepartments()
+  {
+    this.LeavdataService.Getalldepartments().subscribe((response)=>{
+    if (response && response.length > 0) {
+
+        this.delpartmentArray = response.map((data) => ({
+          label: data.department,
+          value: data.departmentId
+        }))
+      //  this.delpartmentArray.unshift({ label: '--Select--', value: -1 });
+      }
+
+    })
+  }
+  clear()
+  {
+     this.fetchLeaveBalances();
+  }
     
 }

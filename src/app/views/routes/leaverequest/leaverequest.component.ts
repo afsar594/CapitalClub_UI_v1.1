@@ -72,8 +72,8 @@ export class LeaverequestComponent implements OnInit {
 
 
     this.totalDays = 0;
-     this.getLeaveTypesById()
-   //this.GetLeaveType()
+    // this.getLeaveTypesById()
+   this.GetLeaveType()
 
   }
 
@@ -90,6 +90,7 @@ export class LeaverequestComponent implements OnInit {
     }
   }
 
+  
   onSubmit(leavdata: NewLeaveDataModel) {
     this.leaveform.markAllAsTouched()
     leavdata.TotalDays = this.totalDays;
@@ -103,20 +104,20 @@ export class LeaverequestComponent implements OnInit {
       return false;
     }
     leavdata.EmployeeID = this.currentUserData.id;
-
+    this.submitted = true;
     this.LeaveDataService.SendNewLeaveRequest(leavdata).subscribe(res => {
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfull Added' });
-
+    this.submitted = false;
       this.valueChange.emit();
       this.leaveform.reset();
 
     },
       err => {
         this.messageService.add({ severity: 'error', summary: 'Cant Process Now', detail: 'network Error' });
-
+      this.submitted = false;
       }
     )
-    this.submitted = true;
+
   }
 
   ExitNew() {
@@ -127,47 +128,45 @@ export class LeaverequestComponent implements OnInit {
     this.totalDays=0
   }
 
-  onLeaveChange(event) {
-    this.LeaveDataService.ReadLeaveBalTypeDatas(this.currentUserData.id, event.value.leaveTypeId).subscribe(res => {
-      this.balLeave = res[0]?.leaveBalNo;
-      this.balancedLeave = res[0]?.leaveBalNo;
-    }); 
-      // Reset from/to dates
+ onLeaveChange(event) {
+
   this.bindingFromDate = null;
   this.bindingEndDate = null;
+  this.totalholidays = 0;
 
   this.leaveform.get('fromdate')?.setValue(null);
   this.leaveform.get('enddate')?.setValue(null);
 
-  // Reset calculations
   this.totalDays = 0;
   this.leaveAccrued = 0;
-    const today = new Date();
-    const startDate = new Date(this.bindingFromDate);
-    const endDate = this.bindingEndDate ? new Date(this.bindingEndDate) : null;
-  
-    const diffFromToday = startDate.getTime() - today.getTime();
-    this.totalDays = Math.ceil(diffFromToday / (1000 * 3600 * 24)) + 1;
-    this.leaveAccrued = Math.round((this.totalDays / 30) * 2.5);
-    this.balLeave = this.balancedLeave + this.leaveAccrued;
-  
-    if (endDate) {
-      const diffBetweenDates = endDate.getTime() - startDate.getTime();
-      this.totalDays = Math.ceil(diffBetweenDates / (1000 * 3600 * 24)) + 1;
-    }
-    if (this.totalDOJDays <= 90) {
-      if (event.value.leaveType === 'Sick Leave' || event.value.leaveType === 'Annual Leave') {
-        if (!this.isload) {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Cannot Apply!',
-            detail: 'Date of joining must be greater than 90 days'
-          });
-        }
-        this.totalDays = 0; 
+
+  if (event.value.leaveType === 'Annual Leave') {
+    this.LeaveDataService.ReadLeaveBalTypeDatas(
+      this.currentUserData.id,
+      event.value.leaveTypeId
+    ).subscribe(res => {
+      this.balLeave = res[0]?.leaveBalNo ?? 0;
+      this.balancedLeave = res[0]?.leaveBalNo ?? 0;
+    });
+  } else {
+    this.balLeave = 0;
+    this.balancedLeave = 0;
+  }
+
+  if (this.totalDOJDays <= 90) {
+    if (event.value.leaveType === 'Sick Leave' || event.value.leaveType === 'Annual Leave') {
+      if (!this.isload) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Cannot Apply!',
+          detail: 'Date of joining must be greater than 90 days'
+        });
       }
+      this.totalDays = 0;
     }
   }
+}
+
 
 
   // UpdateDate(leavdata: any) {
@@ -288,7 +287,7 @@ export class LeaverequestComponent implements OnInit {
   
   //   return true;
   // }
-UpdateDate(leavdata: any) {
+  UpdateDate(leavdata: any) {
   this.isload = false;
   this.totalDays = 0;
 
@@ -301,80 +300,25 @@ UpdateDate(leavdata: any) {
     this.leaveform.get('enddate')?.setValue(null);
     return false;
   }
-   let fromDate = this.leaveform.get('fromdate')?.value;
-let toDate = this.leaveform.get('enddate')?.value;
 
-if (fromDate && toDate) {
-  this.getholidaysbyDate(fromDate,toDate)
-}
+  let fromDate = this.leaveform.get('fromdate')?.value;
+  let toDate = this.leaveform.get('enddate')?.value;
+  let leavetype = this.leaveform.get('leavetype')?.value;
 
+  if (fromDate && toDate && leavetype.leaveType == 'Annual Leave') {
+    this.getholidaysbyDate(fromDate, toDate);
+  }
 
   const today = new Date();
   const startDate = new Date(this.bindingFromDate);
   const endDate = this.bindingEndDate ? new Date(this.bindingEndDate) : null;
-  const dojDate = new Date(this.empdata.doj);
-
-  // Normalize dates to midnight
-  const normalizedStartDate = new Date(startDate);
-  normalizedStartDate.setHours(0, 0, 0, 0);
-
-  const normalizedToday = new Date();
-  normalizedToday.setHours(0, 0, 0, 0);
-
-  const yesterday = new Date(normalizedToday);
-  yesterday.setDate(normalizedToday.getDate() - 1);
-
-  // DOJ Validation
-  const dojDiff = normalizedStartDate.getTime() - dojDate.getTime();
-  this.totalDOJDays = Math.ceil(dojDiff / (1000 * 3600 * 24));
-
-  // Sick Leave validation
-  if (leavdata?.leavetype?.leaveType === 'Sick Leave') {
-    const isToday = normalizedStartDate.getTime() === normalizedToday.getTime();
-    const isYesterday = normalizedStartDate.getTime() === yesterday.getTime();
-
-    if (!isToday && !isYesterday) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Invalid Date for Sick Leave',
-        detail: 'Only today and yesterday are allowed for Sick Leave'
-      });
-      this.leaveform.get('fromdate')?.setValue(null);
-      this.leaveform.get('enddate')?.setValue(null);
-      return false;
-    }
-  }
-
-  // Annual Leave validation (must be in the future only)
-  if (leavdata?.leavetype?.leaveType === 'Annual Leave' && this.currentUserData.workgroupid!=1) {
-    if (normalizedStartDate.getTime() <= normalizedToday.getTime()) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Invalid Date for Annual Leave',
-        detail: 'Annual Leave can only be applied for future dates'
-      });
-      this.leaveform.get('fromdate')?.setValue(null);
-      this.leaveform.get('enddate')?.setValue(null);
-      return false;
-    }
-  }
-
-  // DOJ restriction: 90 days
-  if (
-    this.totalDOJDays < 90 &&
-    (leavdata?.leavetype?.leaveType === 'Sick Leave' || leavdata?.leavetype?.leaveType === 'Annual Leave')
-  ) {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Cannot Apply!',
-      detail: 'Date of joining must be greater than 90 days'
-    });
-    return false;
-  }
 
   // Load leave balance and apply calculation
   if (this.balancedLeave === undefined || this.balancedLeave === null) {
-    this.LeaveDataService.ReadLeaveBalTypeDatas(this.currentUserData.id, leavdata?.leavetype?.leaveTypeId).subscribe(res => {
+    this.LeaveDataService.ReadLeaveBalTypeDatas(
+      this.currentUserData.id,
+      leavdata?.leavetype?.leaveTypeId
+    ).subscribe(res => {
       this.balancedLeave = res[0]?.leaveBalNo || 0;
       this.applyLeaveCalculation(startDate, endDate, today);
     });
@@ -384,6 +328,103 @@ if (fromDate && toDate) {
 
   return true;
 }
+
+// UpdateDate(leavdata: any) {
+//   this.isload = false;
+//   this.totalDays = 0;
+
+//   if (!this.bindingFromDate) {
+//     this.messageService.add({
+//       severity: 'error',
+//       summary: 'Date not Valid',
+//       detail: 'Select start date first'
+//     });
+//     this.leaveform.get('enddate')?.setValue(null);
+//     return false;
+//   }
+//    let fromDate = this.leaveform.get('fromdate')?.value;
+// let toDate = this.leaveform.get('enddate')?.value;
+// let leavetype = this.leaveform.get('leavetype')?.value;
+// if (fromDate && toDate && leavetype.leaveType=='Annual Leave') {
+//   this.getholidaysbyDate(fromDate,toDate)
+// }
+
+
+//   const today = new Date();
+//   const startDate = new Date(this.bindingFromDate);
+//   const endDate = this.bindingEndDate ? new Date(this.bindingEndDate) : null;
+//   const dojDate = new Date(this.empdata.doj);
+
+//   // Normalize dates to midnight
+//   const normalizedStartDate = new Date(startDate);
+//   normalizedStartDate.setHours(0, 0, 0, 0);
+
+//   const normalizedToday = new Date();
+//   normalizedToday.setHours(0, 0, 0, 0);
+
+//   const yesterday = new Date(normalizedToday);
+//   yesterday.setDate(normalizedToday.getDate() - 1);
+
+//   // DOJ Validation
+//   const dojDiff = normalizedStartDate.getTime() - dojDate.getTime();
+//   this.totalDOJDays = Math.ceil(dojDiff / (1000 * 3600 * 24));
+
+//   // Sick Leave validation
+//   if (leavdata?.leavetype?.leaveType === 'Sick Leave') {
+//     const isToday = normalizedStartDate.getTime() === normalizedToday.getTime();
+//     const isYesterday = normalizedStartDate.getTime() === yesterday.getTime();
+
+//     if (!isToday && !isYesterday) {
+//       this.messageService.add({
+//         severity: 'error',
+//         summary: 'Invalid Date for Sick Leave',
+//         detail: 'Only today and yesterday are allowed for Sick Leave'
+//       });
+//       this.leaveform.get('fromdate')?.setValue(null);
+//       this.leaveform.get('enddate')?.setValue(null);
+//       return false;
+//     }
+//   }
+
+//   // Annual Leave validation (must be in the future only)
+//   if (leavdata?.leavetype?.leaveType === 'Annual Leave' && this.currentUserData.workgroupid!=1) {
+//     if (normalizedStartDate.getTime() <= normalizedToday.getTime()) {
+//       this.messageService.add({
+//         severity: 'error',
+//         summary: 'Invalid Date for Annual Leave',
+//         detail: 'Annual Leave can only be applied for future dates'
+//       });
+//       this.leaveform.get('fromdate')?.setValue(null);
+//       this.leaveform.get('enddate')?.setValue(null);
+//       return false;
+//     }
+//   }
+
+//   // DOJ restriction: 90 days
+//   if (
+//     this.totalDOJDays < 90 &&
+//     (leavdata?.leavetype?.leaveType === 'Sick Leave' || leavdata?.leavetype?.leaveType === 'Annual Leave')
+//   ) {
+//     this.messageService.add({
+//       severity: 'error',
+//       summary: 'Cannot Apply!',
+//       detail: 'Date of joining must be greater than 90 days'
+//     });
+//     return false;
+//   }
+
+//   // Load leave balance and apply calculation
+//   if (this.balancedLeave === undefined || this.balancedLeave === null) {
+//     this.LeaveDataService.ReadLeaveBalTypeDatas(this.currentUserData.id, leavdata?.leavetype?.leaveTypeId).subscribe(res => {
+//       this.balancedLeave = res[0]?.leaveBalNo || 0;
+//       this.applyLeaveCalculation(startDate, endDate, today);
+//     });
+//   } else {
+//     this.applyLeaveCalculation(startDate, endDate, today);
+//   }
+
+//   return true;
+// }
 
 
   applyLeaveCalculation(startDate: Date, endDate: Date | null, today: Date) {

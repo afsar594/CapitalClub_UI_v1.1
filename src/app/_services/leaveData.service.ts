@@ -35,6 +35,17 @@ export class LeaveDataService {
         }));
     }
 
+      UpdateApproveRequest(leaveData: number, stStat: number, empid: number, StRem: string,fromdate:string,enddate:string) {
+        return this.http.get<NewLeaveDataModel>(this.apiUrl + 'leave/UpdateApproveRequest/' + leaveData + "/" + stStat + "/" + empid + "/" + StRem +"/"+ fromdate+"/"+ enddate).pipe(map(LeaveData => {
+            return LeaveData;
+        }));
+    }
+
+        ApproveMultiLeaveData(leaveData: number, stStat: number, empid: number, StRem: string) {
+        return this.http.get<NewLeaveDataModel>(this.apiUrl + 'leave/UpdateMultiApprove/' + leaveData + "/" + stStat + "/" + empid + "/" + StRem).pipe(map(LeaveData => {
+            return LeaveData;
+        }));
+    }
 
     GetCompanyMasterDropdown() {
         return this.http.get<Array<CompanyDataModel>>(this.apiUrl + 'leave/GetCompanies');
@@ -86,17 +97,17 @@ export class LeaveDataService {
 
 
     FilterPendingLeavesDatas(staffName: number, fromdate: string, enddate: string, companyId: number) {
-
         return this.http.get<Array<ViewLeaveDataModel>>(this.apiUrl + "leave/getallleavependingdata/" + staffName + "/" + fromdate + "/" + enddate + "/" + companyId).pipe(map(leavedatas => {
             return leavedatas
         }))
     }
 
-    // FilterPendingLeaveData(staffName:string){
-    //     return this.http.get<Array<ViewLeaveDataModel>>( this.apiUrl+'leave/getallleavependingdata').pipe(map(leavedatas=>{
-    //         return leavedatas
-    //     }))
-    // }
+   FilterPendingMultiLeavesDatas(staffName: number, fromdate: string, enddate: string, companyId: number, userId: number) {
+       
+        return this.http.get<Array<ViewLeaveDataModel>>(this.apiUrl + "leave/getallleavependingmultidata/" + staffName + "/" + fromdate + "/" + enddate + "/" + companyId+ "/" + userId).pipe(map(leavedatas => {
+            return leavedatas
+        }))
+    }
 
     FilterApprovedLeaveDatas(staffName: number, fromdate: string, enddate: string,companyId:number) {
         return this.http.get<Array<ViewLeaveDataModel>>(this.apiUrl + "leave/getallleaveapproveddata/" + staffName + "/" + fromdate + "/" + enddate+"/"+companyId).pipe(map(leavedatas => {
@@ -105,6 +116,9 @@ export class LeaveDataService {
     }
     GetallStaff() {
         return this.http.get<any>(this.apiUrl + 'leave/getallstaff');
+    }
+      Getalldepartments() {
+        return this.http.get<any>(this.apiUrl + 'leave/getalldepartment');
     }
 
        GetallStaffBYworkgroupId(empid: number,WorkgroupId:number) {
