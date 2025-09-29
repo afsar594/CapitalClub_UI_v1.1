@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-   //  apiUrl: 'http://localhost:54673/api/v1/',
-       apiUrl: ' http://103.74.54.207:8186/api/v1/'// Capital Club
+     apiUrl: 'http://localhost:54673/api/v1/',
+     //  apiUrl: ' http://103.74.54.207:8186/api/v1/'// Capital Club
 
-    // apiUrl: 'http://103.74.54.207:8098/apis/v1/',
-    //  apiUrl: ' http://103.74.54.207:8285/api/v1/'
-      // apiUrl: 'http://103.74.54.207:8103/api/v1/'
+
+    // apiUrl: '194.233.95.37:8186/apis/v1/', new
+
 };
 
