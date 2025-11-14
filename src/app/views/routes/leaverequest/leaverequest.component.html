@@ -1,92 +1,169 @@
 <!-- <app-page-header [nav]='[{label: "leaveReqform"},{label: "Leave Request"}]'
     [title]='title'></app-page-header> -->
-    <p-toolbar>
-        <div class="p-toolbar-group-start">
-               <button [disabled]="submitted"  pButton type="button" [label]="btnFlag.save == true ? 'Save': 'Update'" class=" p-button-info mr-2"
-                     icon="fa fa-floppy-o"       (click)="onSubmit(leaveform.value)"></button>
+<p-toolbar>
+  <div class="p-toolbar-group-start">
+    <button
+      [disabled]="submitted"
+      pButton
+      type="button"
+      [label]="btnFlag.save == true ? 'Save' : 'Update'"
+      class="p-button-info mr-2"
+      icon="fa fa-floppy-o"
+      (click)="onSubmit(leaveform.value)"
+    ></button>
 
-            <p-button type="button" label="Exit" (click)='ExitNew()' icon="fa fa-sign-out" class="mr-2"
-                [style]="{ 'background-color': '#ec3a2d', 'border-color': '#ec3a2d' }" />
-        </div>
-    </p-toolbar>
-    <p-card [formGroup]='leaveform'>
-    
-        <div class="grid p-fluid">
-            <div class="col-12 md:col-6"> 
-                <div class="flex flex-column gap-2">
-                    <label>Leave Type</label>
-                    <p-dropdown placeholder="-----Select Type-----" [options]="leaveTypes"
-                        (onChange)="onLeaveChange($event)" formControlName="leavetype" optionLabel="leaveType"
-                        [showClear]="true"/>
-                       
-                    <p-message severity="error" text="Required"
-                    *ngIf="leaveform.controls['leavetype'].touched &&leaveform.controls['leavetype'].invalid"></p-message>
-                </div>
-            </div>
-            <div class="col-12 md:col-6">
-                <div class="flex flex-column gap-2">
-                    <label for="username"> Request Date</label>
-    
-                    <input id="lastname3" type="text" pInputText value="{{TodayDate | date:'dd/M/yy'}}" readonly />
-                </div>
-            </div>
-    
-        </div>
-        <br>
-        <div class="grid p-fluid">
-            <div class="col-12 md:col-6">
-                <div class="flex flex-column gap-2">
-                    <label for="username"> From Date</label>
-                    <p-calendar  formControlName="fromdate" [showButtonBar]="true"  useUtc [appendTo]="'body'"
-                        [(ngModel)]="bindingFromDate" [style]="{'width': '100%'}" (onSelect)="UpdateDate(leaveform.value)"
-                        dateFormat="dd/M/yy" readonly />
-                    <p-message severity="error" text="Required"
-                    *ngIf="leaveform.controls['fromdate'].touched &&leaveform.controls['fromdate'].invalid"></p-message>
-                </div>
-            </div>
-            <div class="col-12 md:col-6">
-                <div class="flex flex-column gap-2">
-                    <label for="username"> End Date</label>
-                    <p-calendar [appendTo]="'body'" [showButtonBar]="true"  useUtc formControlName="enddate"
-                        [(ngModel)]="bindingEndDate" dateFormat="dd/M/yy" readonly [style]="{'width': '100%'}"
-                        (onSelect)="UpdateDate(leaveform.value)" />
-                    <p-message severity="error" text="Required"
-                    *ngIf="leaveform.controls['enddate'].touched &&leaveform.controls['enddate'].invalid"></p-message>
-    
-                </div>
-            </div>
-        </div>
-    
-        <!-- IIIrd row-->
-        <div class="grid p-fluid">
-            <div class="col-12 md:col-6">
-                <h1 style="margin-left: 10px;"><i class="fas fa-file"></i>
-                    <input formControlName="imageFile" id="file" type="file" class="form-control"
-                        (change)="onFileSelect($event)">
-                </h1>
-            </div>
-            <div class="col-12 md:col-6">
-                <div class="flex flex-column gap-2">
-                    <label>Reason</label>
-                    <textarea rows="3" cols="30" pInputTextarea formControlName="reason">
-                                  </textarea>
-                    <p-message severity="error" text="Required"
-                    *ngIf="leaveform.controls['reason'].touched &&leaveform.controls['reason'].invalid"></p-message>
-    
-                </div>
-            </div>
-        </div>
-        <div class="grid p-fluid">
-            <div class="col-12 md:col-6">
-                <p-button pButton type="button" style="height: 100px; width: 220px;" label="DAYS" class="ui-button-warning">
-                    <h1>{{totalDays-totalholidays}}</h1>
-                </p-button>
-            </div>
-            <div class="col-12 md:col-6">
-                <p-button pButton type="button" style="height: 100px; width: 220px;" label="Balance Leave"
-                    class="ui-button-success">
-                    <h1>{{balLeave}}</h1>
-                </p-button>
-            </div>
-        </div>
-    </p-card>
+    <p-button
+      type="button"
+      label="Exit"
+      (click)="ExitNew()"
+      icon="fa fa-sign-out"
+      class="mr-2"
+      [style]="{ 'background-color': '#ec3a2d', 'border-color': '#ec3a2d' }"
+    />
+  </div>
+</p-toolbar>
+<p-card [formGroup]="leaveform">
+  <div class="grid p-fluid">
+    <div class="col-12 md:col-6">
+      <div class="flex flex-column gap-2">
+        <label>Leave Type</label>
+        <p-dropdown
+          placeholder="-----Select Type-----"
+          [options]="leaveTypes"
+          (onChange)="onLeaveChange($event)"
+          formControlName="leavetype"
+          optionLabel="leaveType"
+          [showClear]="true"
+        />
+
+        <p-message
+          severity="error"
+          text="Required"
+          *ngIf="
+            leaveform.controls['leavetype'].touched &&
+            leaveform.controls['leavetype'].invalid
+          "
+        ></p-message>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="flex flex-column gap-2">
+        <label for="username"> Request Date</label>
+
+        <input
+          id="lastname3"
+          type="text"
+          pInputText
+          value="{{ TodayDate | date : 'dd/M/yy' }}"
+          readonly
+        />
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="grid p-fluid">
+    <div class="col-12 md:col-6">
+      <div class="flex flex-column gap-2">
+        <label for="username"> From Date</label>
+        <p-calendar
+          formControlName="fromdate"
+          [showButtonBar]="true"
+          useUtc
+          [appendTo]="'body'"
+          [(ngModel)]="bindingFromDate"
+          [style]="{ width: '100%' }"
+          (onSelect)="UpdateDate(leaveform.value)"
+          dateFormat="dd/M/yy"
+          readonly
+        />
+        <p-message
+          severity="error"
+          text="Required"
+          *ngIf="
+            leaveform.controls['fromdate'].touched &&
+            leaveform.controls['fromdate'].invalid
+          "
+        ></p-message>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="flex flex-column gap-2">
+        <label for="username"> End Date</label>
+        <p-calendar
+          [appendTo]="'body'"
+          [showButtonBar]="true"
+          useUtc
+          formControlName="enddate"
+          [(ngModel)]="bindingEndDate"
+          dateFormat="dd/M/yy"
+          readonly
+          [style]="{ width: '100%' }"
+          (onSelect)="UpdateDate(leaveform.value)"
+        />
+        <p-message
+          severity="error"
+          text="Required"
+          *ngIf="
+            leaveform.controls['enddate'].touched &&
+            leaveform.controls['enddate'].invalid
+          "
+        ></p-message>
+      </div>
+    </div>
+  </div>
+
+  <!-- IIIrd row-->
+  <div class="grid p-fluid">
+    <div class="col-12 md:col-6">
+      <h1 style="margin-left: 10px">
+        <i class="fas fa-file"></i>
+        <input
+          formControlName="imageFile"
+          id="file"
+          type="file"
+          class="form-control"
+          (change)="onFileSelect($event)"
+        />
+      </h1>
+    </div>
+    <div class="col-12 md:col-6">
+      <div class="flex flex-column gap-2">
+        <label>Reason</label>
+        <textarea rows="3" cols="30" pInputTextarea formControlName="reason">
+        </textarea>
+        <p-message
+          severity="error"
+          text="Required"
+          *ngIf="
+            leaveform.controls['reason'].touched &&
+            leaveform.controls['reason'].invalid
+          "
+        ></p-message>
+      </div>
+    </div>
+  </div>
+  <div class="grid p-fluid">
+    <div class="col-12 md:col-6">
+      <p-button
+        pButton
+        type="button"
+        style="height: 100px; width: 220px"
+        label="DAYS"
+        class="ui-button-warning"
+      >
+        <h1>{{ gettotalDaysWithoutLeave() }}</h1>
+      </p-button>
+    </div>
+    <div class="col-12 md:col-6">
+      <p-button
+        pButton
+        type="button"
+        style="height: 100px; width: 220px"
+        label="Balance Leave"
+        class="ui-button-success"
+      >
+        <h1>{{ balLeave }}</h1>
+      </p-button>
+    </div>
+  </div>
+</p-card>
